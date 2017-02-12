@@ -31,10 +31,12 @@ class Home extends React.Component {
             </thead>
             <tbody>
               <tr>
+                <Link to="details/AUD">
                 <td><img src="../../public/img/AUD.png" /> Australia</td>
                 <td>Dolar australijski</td>
                 <td>AUD</td>
                 <td>4.5678</td>
+                </Link>
               </tr>
               <tr>
                 <td><img src="../../public/img/AUD.png" /> Australia</td>

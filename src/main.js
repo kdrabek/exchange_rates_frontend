@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 import Notifications from './components/Notifications';
+import Details from './components/Details';
 
 render(
   <Router history={browserHistory}>
@@ -16,6 +17,7 @@ render(
       <Route path="login" component={Login} />
       <Route path="register" component={Register} />
       <Route path="notifications" component={Notifications} />
+      <Route path="details/:currencyCode" component={Details} />
     </Route>
   </Router>,
   document.getElementById('app')
