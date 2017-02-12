@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 import { TopBar, TopBarTitle } from 'react-foundation';
 import { Row, Column } from 'react-foundation';
@@ -12,7 +13,9 @@ class Header extends React.Component {
         <Row>
           <Column large={7}>
             <TopBarTitle>
-              <span className="app-name">Exchange Rates</span>
+              <Link to="/">
+                <span className="app-name">Exchange Rates</span>
+              </Link>
             </TopBarTitle>
           </Column>
           <Column large={5}>
