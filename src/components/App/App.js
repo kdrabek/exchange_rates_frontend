@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import { Grid } from 'react-bootstrap';
+
+import AppNavbar from '../AppNavbar/AppNavbar';
+import Tagline from '../Tagline/Tagline';
 import './App.css';
-import { Button } from 'react-bootstrap';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Button bsStyle="success">App component</Button>
-        { this.props.children }
+        <AppNavbar />
+        <Grid>
+          <Tagline />
+          { this.props.children }
+        </Grid>
       </div>
     );
   }

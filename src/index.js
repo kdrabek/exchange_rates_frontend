@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, IndexRoute, Route, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 import App from './components/App/App';
 import Home from './components/Home/Home';
@@ -12,6 +14,7 @@ import Details from './components/Details/Details';
 import './index.css';
 
 ReactDOM.render(
+  <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
@@ -20,6 +23,7 @@ ReactDOM.render(
         <Route path="notifications" component={Notifications} />
         <Route path="details/:currencyCode" component={Details} />
       </Route>
-    </Router>,
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
