@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { Button, Navbar, Nav, NavItem, Row, Col } from 'react-bootstrap';
 
 class AppNavbar extends React.Component {
@@ -8,15 +9,23 @@ class AppNavbar extends React.Component {
         <Row>
           <Col Col md={8} mdPush={2}>
             <Navbar.Header>
-              <Navbar.Brand>Exchange Rates</Navbar.Brand>
+              <Navbar.Brand>
+                <Link to="/">
+                   Exchange Rates
+                </Link>
+              </Navbar.Brand>
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav pullRight>
-                <NavItem eventKey={1} href="#">
-                  <Button bsStyle="success">Zaloguj się</Button>
+                <NavItem>
+                  <Link to="login">
+                    <Button bsStyle="success">Zaloguj się</Button>
+                  </Link>
                 </NavItem>
-                <NavItem eventKey={2} href="#">
-                  <Button bsStyle="warning">Zarejestruj się</Button>
+                <NavItem>
+                  <Link to="register">
+                    <Button bsStyle="warning">Zarejestruj się</Button>
+                  </Link>
                 </NavItem>
               </Nav>
             </Navbar.Collapse>

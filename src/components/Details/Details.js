@@ -19,7 +19,6 @@ class Details extends Component {
   }
 
   handleChange(e){
-    console.log(e.target.value);
     const currencyCode = this.props.routeParams.currencyCode;
     this.props.dispatch(
       ratesActions.loadRatesForCurrency(
@@ -52,7 +51,6 @@ class Details extends Component {
       data = this.props.ratesDetails.map(rate => {
         return { date: rate.date, rate: parseFloat(rate.rate) };
       });
-      console.log('chartData', data);
     } else {
       ratesTable = <tr><td>Sciagam</td></tr>;
     }
@@ -83,7 +81,7 @@ class Details extends Component {
           <h4>Widok szczegółowy</h4>
           <hr/>
           <h4 className="capitalize">
-            <img src={currencyCodePictures[this.props.routeParams.currencyCode]} />
+            <img src={currencyCodePictures[currencyCode]} />
              &nbsp;{ this.props.ratesDetails ? this.props.ratesDetails[0].name : ''}
              </h4>
           <Chart data={data.reverse()}/>
