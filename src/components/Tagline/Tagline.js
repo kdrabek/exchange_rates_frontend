@@ -9,7 +9,7 @@ class Tagline extends React.Component {
     <Row>
       <Col xs={12} md={12}>
         <PageHeader>
-          Kursy walut NBP <small>Według tabeli A</small>
+          Kursy walut NBP <br /><small>Według tabeli A</small>
         </PageHeader>
       </Col>
     </Row>

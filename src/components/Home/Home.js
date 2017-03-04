@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 import * as ratesActions from '../../actions/actions';
-import  { currencyCodePictures, plDayLabels, plMonthLabels } from './utils';
-import './Home.css';
+import { currencyCodePictures } from '../../utils/currencyCodes';
+import { plDayLabels, plMonthLabels } from '../../utils/datePicker';
 
 class Home extends Component {
 
@@ -62,7 +62,7 @@ class Home extends Component {
         </FormGroup>
       </Col>
       <Col xs={9} md={9}>
-        <h3 className="force-text-left">Kursy walut ({this.props.rates.tableDate})</h3>
+        <h3>Kursy walut ({this.props.rates.tableDate})</h3>
         <hr />
         <Table striped hover className="force-text-left">
         <thead>
