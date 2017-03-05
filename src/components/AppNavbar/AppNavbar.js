@@ -18,12 +18,12 @@ class AppNavbar extends React.Component {
             <Navbar.Collapse>
               <Nav pullRight>
                 <NavItem>
-                  <Link to="login">
+                  <Link to="/login">
                     <Button bsStyle="success">Zaloguj się</Button>
                   </Link>
                 </NavItem>
                 <NavItem>
-                  <Link to="register">
+                  <Link to="/register">
                     <Button bsStyle="warning">Zarejestruj się</Button>
                   </Link>
                 </NavItem>
