@@ -29,7 +29,22 @@ function ratesDetails(state = {}, action) {
   }
 }
 
+function user(state = {}, action) {
+  switch (action.type) {
+    case actionTypes.LOGIN_USER_ERROR: {
+      return {
+        ...state,
+        'error': action.err
+      };
+    }
+    default:
+      return state
+  }
+}
+
+
 export default combineReducers({
   rates,
-  ratesDetails
+  ratesDetails,
+  user
 });

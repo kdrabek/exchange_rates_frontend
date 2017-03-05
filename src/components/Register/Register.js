@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Row, Col, FormControl, Button, ControlLabel, FormGroup } from 'react-bootstrap';
 import { LocalForm, Control } from 'react-redux-form';
+import { connect } from 'react-redux';
 
 class Register extends Component {
 
@@ -43,4 +44,8 @@ class Register extends Component {
   }
 }
 
-export default Register;
+function mapStateToProps(state, ownProps) {
+  return {};
+}
+
+export default connect(mapStateToProps)(Register);

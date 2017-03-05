@@ -4,3 +4,7 @@ export const plMonthLabels = [
   'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'
 ];
 
+export const plLoginErrors = {
+  'Could not authenticate using provided credentials': 'Email lub hasło niepoprawne',
+  'Password or email is missing': 'Proszę uzupełnić wszystkie pola'
+};

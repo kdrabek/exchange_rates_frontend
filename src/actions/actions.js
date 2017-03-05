@@ -44,3 +44,29 @@ export function ratesDetailsLoaded(rates_details) {
     type: actionTypes.RATES_DETAILS_LOADED, rates_details
   };
 }
+
+export function loginUser(user){
+  return function(dispatch){
+    return ratesApi.login(user)
+      .then(loggedInUser =>{
+        console.log('action returned', loggedInUser);
+        dispatch(loginUserComplete(loggedInUser));
+      })
+      .catch(err => {
+        console.log('ooopsss', err);
+        dispatch(loginUserError(err));
+      });
+  }
+}
+
+export function loginUserComplete(loggedInUser) {
+  return {
+    type: actionTypes.LOGIN_USER_COMPLETE, user: loggedInUser
+  }
+}
+
+export function loginUserError(err) {
+  return {
+    type: actionTypes.LOGIN_USER_ERROR, err: err.error
+  }
+}

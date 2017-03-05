@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import * as ratesActions from '../../actions/actions';
 import { currencyCodePictures } from '../../utils/currencyCodes';
-import { plDayLabels, plMonthLabels } from '../../utils/datePicker';
+import { plDayLabels, plMonthLabels } from '../../utils/plLocale';
 
 class Home extends Component {
 
