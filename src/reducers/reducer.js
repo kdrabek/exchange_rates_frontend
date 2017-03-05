@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import * as actionTypes from '../actions/actionTypes';
+import { reducer as formReducer } from 'redux-form';
 
 const rates = (state = {}, action) => {
   switch (action.type) {
@@ -34,13 +35,13 @@ function user(state = {}, action) {
     case actionTypes.LOGIN_USER_ERROR: {
       return {
         ...state,
-        error: action.err
+        apiError: action.err
       };
     }
     case actionTypes.LOGIN_USER_COMPLETE: {
       return {
         ...state,
-        error: ''
+        apiError: ''
       }
     }  
     default:
@@ -52,5 +53,6 @@ function user(state = {}, action) {
 export default combineReducers({
   rates,
   ratesDetails,
-  user
+  user,
+  form: formReducer
 });

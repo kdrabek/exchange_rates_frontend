@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Row, Col, FormControl, Button, ControlLabel, FormGroup } from 'react-bootstrap';
-import { LocalForm, Control } from 'react-redux-form';
-import { connect } from 'react-redux';
+import { Row, Col, FormControl, Button, ControlLabel, FormGroup, Form } from 'react-bootstrap';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
+
+import './Register.css';
+
+const required = value => value ? undefined : 'To pole jest wymagane';
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
+    <FormGroup>
+      <ControlLabel>{label}</ControlLabel>
+      <FormControl {...input} placeholder={label} type={type}/>
+      {touched && error && <span>{error}</span>}
+    </FormGroup>
+);
+
 
 class Register extends Component {
 
-  handleSubmit(values){
+  submitForm(values){
+    if (values.password !== values.password2) {
+      throw new SubmissionError({_error: 'Podane hasła nie są takie same.'});
+    }
     console.log("submit ", values);
   }
 
@@ -16,27 +30,47 @@ class Register extends Component {
         <Col md={6} mdOffset={3}>
           <h4>Rejestracja</h4>
 
-            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
-              <FormGroup>
-                <ControlLabel>Email:</ControlLabel>
-                <Control type="email" model=".username" component={FormControl} label="ddd"/>
-              </FormGroup>
+            <Form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
+              <Field
+                name="email"
+                type="email"
+                component={renderField}
+                label="Email"
+                validate={required}
+              />
+              <Field
+                name="password"
+                type="password"
+                component={renderField}
+                label="Hasło"
+                validate={required}
+              />
+              <Field
+                name="password2"
+                type="password"
+                component={renderField}
+                label="Powtórz hasło"
+                validate={required}
+              />
 
-              <FormGroup>
-                <ControlLabel>Hasło:</ControlLabel>
-                <Control type="password" model=".password" component={FormControl}/>
-              </FormGroup>
+              {this.props.error && <div className="error-field">{this.props.error}</div>}
 
-              <FormGroup>
-                <ControlLabel>Powtórz hasło:</ControlLabel>
-                <Control type="password" model=".password2" component={FormControl}/>
-              </FormGroup>
-
-              <FormGroup>
-                <Button bsStyle="primary" type="submit" block>Zarejestruj</Button>
-              </FormGroup>
-            </LocalForm>
-
+              <Button
+                bsStyle="primary"
+                type="submit"
+                disabled={this.props.submitting}
+                block>
+                Zarejestruj
+              </Button>
+              <Button
+                bsStyle="warning"
+                type="button"
+                disabled={this.props.pristine || this.props.submitting}
+                onClick={this.props.reset}
+                block>
+                Reset
+              </Button>
+            </Form>
             <Link to="/login">Masz już konto? Zaloguj się</Link>
         </Col>
       </Row>
@@ -44,8 +78,5 @@ class Register extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {};
-}
 
-export default connect(mapStateToProps)(Register);
+export default reduxForm({form: 'registerForm'})(Register);
