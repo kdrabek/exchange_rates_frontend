@@ -60,7 +60,7 @@ class Register extends Component {
                 type="submit"
                 disabled={this.props.submitting}
                 block>
-                Zarejestruj
+                 Zarejestruj się.
               </Button>
               <Button
                 bsStyle="warning"
@@ -77,6 +77,5 @@ class Register extends Component {
     );
   }
 }
-
 
 export default reduxForm({form: 'registerForm'})(Register);

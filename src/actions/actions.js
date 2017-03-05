@@ -1,3 +1,4 @@
+import { browserHistory } from 'react-router';
 import * as actionTypes from './actionTypes';
 import Api from '../utils/api';
 
@@ -49,8 +50,10 @@ export function loginUser(user){
   return function(dispatch){
     return ratesApi.login(user)
       .then(loggedInUser =>{
-        localStorage.setItem('AuthToken', loggedInUser.token);
+        localStorage.setItem('AuthUserToken', loggedInUser.token);
+        localStorage.setItem('AuthUserEmail', user.email);
         dispatch(loginUserComplete(loggedInUser));
+        browserHistory.push('/');
       })
       .catch(err => {
         dispatch(loginUserError(err));
@@ -58,14 +61,38 @@ export function loginUser(user){
   }
 }
 
+export function logoutUser(){
+  return function(dispatch){
+    localStorage.removeItem('AuthUserToken');
+    localStorage.removeItem('AuthUserEmail');
+    dispatch(logoutUserComplete());
+    browserHistory.push('/');
+  }
+}
+
 export function loginUserComplete(loggedInUser) {
   return {
-    type: actionTypes.LOGIN_USER_COMPLETE, user: loggedInUser
+    type: actionTypes.LOGIN_USER_COMPLETE,
+    user: loggedInUser,
+    err: null,
+    authenticated: true
   }
 }
 
 export function loginUserError(err) {
   return {
-    type: actionTypes.LOGIN_USER_ERROR, err: err.error
+    type: actionTypes.LOGIN_USER_ERROR,
+    user: null,
+    err: err.error,
+    authenticated: false
+  }
+}
+
+export function logoutUserComplete() {
+  return {
+    type: actionTypes.LOGOUT_USER_COMPLETE,
+    user: null,
+    err: null,
+    authenticated: false
   }
 }

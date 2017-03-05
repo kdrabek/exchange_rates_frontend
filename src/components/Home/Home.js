@@ -87,7 +87,8 @@ class Home extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     rates: state.rates,
-    tableDate: state.tableDate
+    tableDate: state.tableDate,
+    user: state.user
   };
 }
 

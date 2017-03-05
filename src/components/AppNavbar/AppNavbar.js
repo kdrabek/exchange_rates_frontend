@@ -1,9 +1,51 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Button, Navbar, Nav, NavItem, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import * as ratesActions from '../../actions/actions';
 
 class AppNavbar extends React.Component {
+
+  handleLogout(){
+    this.props.dispatch(ratesActions.logoutUser())
+  }
+
+  unauthenticatedMenu(){
+    return (
+      <Nav pullRight>
+        <NavItem>
+          <Link to="/login">
+            <Button bsStyle="success">Zaloguj się</Button>
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Link to="/register">
+            <Button bsStyle="warning">Zarejestruj się</Button>
+          </Link>
+        </NavItem>
+      </Nav>
+      );
+  }
+
+  authenticatedMenu(){
+    return (
+      <Nav pullRight>
+        <NavItem>
+          Witaj, <strong>{localStorage.getItem('AuthUserEmail')}</strong>
+        </NavItem>
+        <NavItem>
+          <Button bsStyle="danger" onClick={this.handleLogout.bind(this)}>Wyloguj się</Button>
+        </NavItem>
+      </Nav>
+      );
+  }
+
   render() {
+    const isAuthenticated = (
+      localStorage.getItem('AuthUserToken') !== null &&
+      localStorage.getItem('AuthUserEmail') !== null
+    );
+    const navButtons = isAuthenticated ? this.authenticatedMenu() : this.unauthenticatedMenu();
     return (
       <Navbar inverse collapseOnSelect fluid>
         <Row>
@@ -16,18 +58,7 @@ class AppNavbar extends React.Component {
               </Navbar.Brand>
             </Navbar.Header>
             <Navbar.Collapse>
-              <Nav pullRight>
-                <NavItem>
-                  <Link to="/login">
-                    <Button bsStyle="success">Zaloguj się</Button>
-                  </Link>
-                </NavItem>
-                <NavItem>
-                  <Link to="/register">
-                    <Button bsStyle="warning">Zarejestruj się</Button>
-                  </Link>
-                </NavItem>
-              </Nav>
+              {navButtons}
             </Navbar.Collapse>
           </Col>
         </Row>
@@ -36,4 +67,11 @@ class AppNavbar extends React.Component {
   }
 }
 
-export default AppNavbar;
+function mapStateToProps(state, ownProps) {
+  return {
+    apiError: state.user.apiError,
+    user: state.user.user
+  };
+}
+
+export default connect(mapStateToProps)(AppNavbar);

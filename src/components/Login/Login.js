@@ -53,7 +53,7 @@ class Login extends Component {
                 type="submit"
                 disabled={this.props.submitting}
                 block>
-                Zarejestruj
+                Zaloguj się.
               </Button>
               <Button
                 bsStyle="warning"
@@ -73,7 +73,8 @@ class Login extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    apiError: state.user.apiError
+    apiError: state.user.apiError,
+    user: state.user
   };
 }
 
