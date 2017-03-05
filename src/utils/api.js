@@ -1,6 +1,7 @@
 const BASE_API_URL = 'http://localhost';
 
 class Api {
+  
   getCurrentRates() {
     const url = '/rates/rates';
     return fetch(`${BASE_API_URL}${url}`).then(response => {
@@ -34,6 +35,21 @@ class Api {
 
   login(user) {
     const url = '/auth/login';
+    return fetch(`${BASE_API_URL}${url}`, {
+      method: 'POST',
+      body: JSON.stringify(user)
+    })
+    .then(response => {
+      return response.json().then(json => {
+      if (!response.ok)
+        return Promise.reject(json);
+      return json;
+      })
+    })
+  }
+  
+  register(user) {
+    const url = '/auth/register';
     return fetch(`${BASE_API_URL}${url}`, {
       method: 'POST',
       body: JSON.stringify(user)

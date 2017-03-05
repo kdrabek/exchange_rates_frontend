@@ -31,7 +31,6 @@ function ratesDetails(state = {}, action) {
 }
 
 function user(state = {}, action) {
-  console.log('wasssup bitches? reducer here', action.type);
   switch (action.type) {
     case actionTypes.LOGIN_USER_ERROR: {
       return {
@@ -42,7 +41,6 @@ function user(state = {}, action) {
       };
     }
     case actionTypes.LOGIN_USER_COMPLETE: {
-      console.log('siemka, skad klikasz, ja z reducera', action);
       return {
         ...state,
         apiError: action.err,
@@ -51,14 +49,29 @@ function user(state = {}, action) {
       }
     } 
     case actionTypes.LOGOUT_USER_COMPLETE: {
-      console.log('hejka, tutaj reducer', action);
       return {
         ...state,
         apiError: action.err,
         user: action.user,
         authenticated: action.authenticated
       }
-    }       
+    }
+    case actionTypes.REGISTER_USER_ERROR: {
+      return {
+        ...state,
+        apiError: action.err,
+        user: action.user,
+        authenticated: action.authenticated
+      };
+    }
+    case actionTypes.REGISTER_USER_COMPLETE: {
+      return {
+        ...state,
+        apiError: action.err,
+        user: action.user,
+        authenticated: action.authenticated
+      }
+    }
     default:
       return state
   }

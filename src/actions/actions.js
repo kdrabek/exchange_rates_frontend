@@ -61,6 +61,21 @@ export function loginUser(user){
   }
 }
 
+export function registerUser(user){
+  return function(dispatch){
+    return ratesApi.register(user)
+      .then(registeredUser =>{
+        localStorage.setItem('AuthUserToken', registeredUser.token);
+        localStorage.setItem('AuthUserEmail', user.email);
+        dispatch(registerUserComplete(registeredUser));
+        browserHistory.push('/');
+      })
+      .catch(err => {
+        dispatch(registerUserError(err));
+      });
+  }
+}
+
 export function logoutUser(){
   return function(dispatch){
     localStorage.removeItem('AuthUserToken');
@@ -93,6 +108,24 @@ export function logoutUserComplete() {
     type: actionTypes.LOGOUT_USER_COMPLETE,
     user: null,
     err: null,
+    authenticated: false
+  }
+}
+
+export function registerUserComplete(user) {
+  return {
+    type: actionTypes.REGISTER_USER_COMPLETE,
+    user: user,
+    err: null,
+    authenticated: true
+  }
+}
+
+export function registerUserError(err) {
+  return {
+    type: actionTypes.REGISTER_USER_ERROR,
+    user: null,
+    err: err.error,
     authenticated: false
   }
 }

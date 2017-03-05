@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Row, Col, FormControl, Button, ControlLabel, FormGroup, Form } from 'react-bootstrap';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { connect } from 'react-redux';
 
 import './Register.css';
+import * as ratesActions from  '../../actions/actions';
+import { plRegisterErrors } from '../../utils/plLocale';
 
 const required = value => value ? undefined : 'To pole jest wymagane';
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
@@ -17,11 +20,11 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 
 class Register extends Component {
 
-  submitForm(values){
-    if (values.password !== values.password2) {
+  submitForm(user){
+    if (user.password !== user.password2) {
       throw new SubmissionError({_error: 'Podane hasła nie są takie same.'});
     }
-    console.log("submit ", values);
+    this.props.dispatch(ratesActions.registerUser(user));
   }
 
   render() {
@@ -54,6 +57,7 @@ class Register extends Component {
               />
 
               {this.props.error && <div className="error-field">{this.props.error}</div>}
+              {this.props.apiError && <div className="error-field">{plRegisterErrors[this.props.apiError]}</div>}
 
               <Button
                 bsStyle="primary"
@@ -78,4 +82,12 @@ class Register extends Component {
   }
 }
 
-export default reduxForm({form: 'registerForm'})(Register);
+function mapStateToProps(state, ownProps) {
+  return {
+    apiError: state.user.apiError,
+    user: state.user
+  };
+}
+
+export default reduxForm({form: 'registerForm'})(connect(mapStateToProps)(Register));
+
