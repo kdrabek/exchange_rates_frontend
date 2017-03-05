@@ -78,7 +78,7 @@ class Details extends Component {
             />
           </FormGroup>
           <Link to="notifications">
-            <Button bsStyle="primary">Przejdź do notyfikacji</Button>
+            <Button bsStyle="primary" block>Przejdź do notyfikacji</Button>
           </Link>
         </Col>
         <Col xs={9} md={9}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Row, Col, FormGroup, ControlLabel, Table } from 'react-bootstrap';
+import { Row, Col, FormGroup, ControlLabel, Table, Button } from 'react-bootstrap';
 import  DatePicker  from 'react-bootstrap-date-picker';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -18,6 +18,14 @@ class Home extends Component {
   handleChange(date) {
     const formattedDate = moment(date).format('YYYY-MM-DD');
     this.props.dispatch(ratesActions.loadRatesForDate(formattedDate));
+  }
+
+  notificationsButton() {
+    return (
+      <Link to="notifications">
+        <Button bsStyle="primary" block>Przejdź do notyfikacji</Button>
+      </Link>
+    );
   }
 
   render() {
@@ -43,6 +51,11 @@ class Home extends Component {
         );
       });
     }
+    const isAuthenticated = (
+      localStorage.getItem('AuthUserToken') !== null &&
+      localStorage.getItem('AuthUserEmail') !== null
+    );
+    const notificationBtn = isAuthenticated ? this.notificationsButton() : '';
     return (
     <Row>
       <Col xs={3} md={3}>
@@ -60,6 +73,7 @@ class Home extends Component {
             value={this.props.rates.tableDate}
           />
         </FormGroup>
+        {notificationBtn}
       </Col>
       <Col xs={9} md={9}>
         <h3>Kursy walut ({this.props.rates.tableDate})</h3>
