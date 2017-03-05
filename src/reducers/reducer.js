@@ -34,9 +34,15 @@ function user(state = {}, action) {
     case actionTypes.LOGIN_USER_ERROR: {
       return {
         ...state,
-        'error': action.err
+        error: action.err
       };
     }
+    case actionTypes.LOGIN_USER_COMPLETE: {
+      return {
+        ...state,
+        error: ''
+      }
+    }  
     default:
       return state
   }

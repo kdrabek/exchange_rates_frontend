@@ -49,11 +49,10 @@ export function loginUser(user){
   return function(dispatch){
     return ratesApi.login(user)
       .then(loggedInUser =>{
-        console.log('action returned', loggedInUser);
+        localStorage.setItem('AuthToken', loggedInUser.token);
         dispatch(loginUserComplete(loggedInUser));
       })
       .catch(err => {
-        console.log('ooopsss', err);
         dispatch(loginUserError(err));
       });
   }

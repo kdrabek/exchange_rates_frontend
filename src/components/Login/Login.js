@@ -11,7 +11,6 @@ import { plLoginErrors } from '../../utils/plLocale';
 class Login extends Component {
 
   handleSubmit(user){
-    console.log("submit ", user);
     this.props.dispatch(ratesActions.loginUser(user));
   }
 
