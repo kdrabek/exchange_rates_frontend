@@ -15,14 +15,18 @@ class Details extends Component {
   
   componentDidMount(){
     const currencyCode = this.props.routeParams.currencyCode;
-    this.props.dispatch(ratesActions.loadRatesForCurrency(currencyCode, 5));
+    const authToken = localStorage.getItem('AuthUserToken');
+    this.props.dispatch(
+      ratesActions.loadRatesForCurrency(authToken, currencyCode, 5)
+    );
   }
 
   handleChange(e){
     const currencyCode = this.props.routeParams.currencyCode;
+    const authToken = localStorage.getItem('AuthUserToken');
     this.props.dispatch(
       ratesActions.loadRatesForCurrency(
-        currencyCode, parseInt(e.target.value)
+        authToken, currencyCode, parseInt(e.target.value)
       )
     );
   }

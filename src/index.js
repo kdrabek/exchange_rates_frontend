@@ -13,6 +13,17 @@ import Details from './components/Details/Details';
 
 import './index.css';
 
+function requireAuth(nextState, replace) {
+  const isAuthenticated = (
+      localStorage.getItem('AuthUserToken') !== null &&
+      localStorage.getItem('AuthUserEmail') !== null
+    );
+
+  if (!isAuthenticated) {
+    replace({pathname: '/login'})
+  }
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -20,8 +31,8 @@ ReactDOM.render(
         <IndexRoute component={Home} />
         <Route path="login" component={Login} />
         <Route path="register" component={Register} />
-        <Route path="notifications" component={Notifications} />
-        <Route path="details/:currencyCode" component={Details} />
+        <Route path="notifications" component={Notifications} onEnter={requireAuth}/>
+        <Route path="details/:currencyCode" component={Details} onEnter={requireAuth}/>
       </Route>
     </Router>
   </Provider>,

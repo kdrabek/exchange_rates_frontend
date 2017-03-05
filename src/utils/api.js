@@ -15,9 +15,19 @@ class Api {
     }).catch(err => {return err;});
   }
 
-  getRatesForCurrency(currency, days) {
+  getRatesForCurrency(token, currency, days) {
     const url = `/rates/rates/${currency}/limit/${days}`;
-    return fetch(`${BASE_API_URL}${url}`).then(response => {
+    let headers = new Headers();
+    headers.append('Authorization', `Token ${token}`);
+
+    return fetch(
+      `${BASE_API_URL}${url}`,
+      {
+        method: 'GET',
+        headers: headers,
+        mode: 'cors'
+      }
+    ).then(response => {
       return response.json();
     }).catch(err => {return err;});
   }

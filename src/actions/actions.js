@@ -22,10 +22,10 @@ export function loadRatesForDate(date){
   };
 }
 
-export function loadRatesForCurrency(currency, days = 5){
+export function loadRatesForCurrency(token, currency, days = 5){
   console.log('dispatching action: loadRatesForCurrency');
   return function(dispatch) {
-    return ratesApi.getRatesForCurrency(currency, days)
+    return ratesApi.getRatesForCurrency(token, currency, days)
       .then(rates_details =>{
         console.log('action loadRatesForCurrency: ', rates_details);
         dispatch(ratesDetailsLoaded(rates_details));
