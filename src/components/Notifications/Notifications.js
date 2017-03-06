@@ -15,6 +15,11 @@ class Notifications extends Component {
     const authToken = localStorage.getItem('AuthUserToken');
     this.props.dispatch(ratesActions.loadNotifications(authToken));
   }
+  
+  deleteNotification(notificationId) {
+    const authToken = localStorage.getItem('AuthUserToken');
+    this.props.dispatch(ratesActions.deleteNotification(authToken, notificationId));    
+  }
 
   displayNotifications(){
     let notificationsTable = this.props.notifications.map((notification, index) => {
@@ -37,7 +42,10 @@ class Notifications extends Component {
             <Switch value={notification.is_active} />
           </td>
           <td>
-            <Button bsStyle="warning">Usuń</Button>
+            <Button 
+              bsStyle="warning"
+              onClick={this.deleteNotification.bind(this, notification.id)}
+            >Usuń</Button>
           </td>
         </tr>
       );

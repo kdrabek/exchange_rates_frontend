@@ -85,6 +85,13 @@ const notifications = (state = {}, action) => {
         notifications: action.notifications.notifications
       };
     }
+    case actionTypes.NOTIFICATION_DELETED: {
+      return {
+        ...state,
+        notifications: state.notifications.filter(
+          notification => notification.id !== action.notificationId)
+      };
+    }
     default:
       return state;
   }

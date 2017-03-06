@@ -49,6 +49,23 @@ class Api {
       return response.json();
     }).catch(err => {return err;});
   }
+  
+  deleteNotification(token, notificationId) {
+    const url = `/notifications/${token}/${notificationId}`;
+    let headers = new Headers();
+    headers.append('Authorization', `Token ${token}`);
+
+    return fetch(
+      `${BASE_API_URL}${url}`,
+      {
+        method: 'DELETE',
+        headers: headers,
+        mode: 'cors'
+      }
+    ).then(response => {
+      return response.json();
+    }).catch(err => {return err;});
+  }
 
   login(user) {
     const url = '/auth/login';

@@ -144,3 +144,19 @@ export function notificationsLoaded(notifications) {
     type: actionTypes.NOTIFICATIONS_LOADED, notifications
   };
 }  
+
+export function deleteNotification(token, notificationId){
+  return function(dispatch) {
+    return ratesApi.deleteNotification(token, notificationId)
+      .then(() => {
+        dispatch(notificationDeleted(notificationId));
+      })
+      .catch(err => { throw err; });
+  };
+}
+
+export function notificationDeleted(notificationId) {
+  return {
+    type: actionTypes.NOTIFICATION_DELETED, notificationId
+  };
+}  
