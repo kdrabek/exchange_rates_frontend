@@ -92,6 +92,17 @@ const notifications = (state = {}, action) => {
           notification => notification.id !== action.notificationId)
       };
     }
+    case actionTypes.NOTIFICATION_UPDATED: {
+      const newNotifications = [...state.notifications];
+      const notificationToUpdate = newNotifications.findIndex(
+        notification => notification.id === action.notification.id);
+      newNotifications[notificationToUpdate] = action.notification;
+
+      return {
+        ...state,
+        notifications: newNotifications
+      };
+    }
     default:
       return state;
   }

@@ -67,6 +67,24 @@ class Api {
     }).catch(err => {return err;});
   }
 
+  updateNotification(token, notification) {
+    const url = `/notifications/${token}/${notification.id}`;
+    let headers = new Headers();
+    headers.append('Authorization', `Token ${token}`);
+
+    return fetch(
+      `${BASE_API_URL}${url}`,
+      {
+        method: 'PUT',
+        headers: headers,
+        mode: 'cors',
+        body: JSON.stringify(notification)
+      }
+    ).then(response => {
+      return response.json();
+    }).catch(err => {return err;});
+  }
+
   login(user) {
     const url = '/auth/login';
     return fetch(`${BASE_API_URL}${url}`, {

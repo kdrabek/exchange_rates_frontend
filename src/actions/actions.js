@@ -160,3 +160,19 @@ export function notificationDeleted(notificationId) {
     type: actionTypes.NOTIFICATION_DELETED, notificationId
   };
 }  
+
+export function updateNotification(token, notification){
+  return function(dispatch) {
+    return ratesApi.updateNotification(token, notification)
+      .then(() => {
+        dispatch(notificationUpdated(notification));
+      })
+      .catch(err => { throw err; });
+  };
+}
+
+export function notificationUpdated(notification) {
+  return {
+    type: actionTypes.NOTIFICATION_UPDATED, notification
+  };
+}  

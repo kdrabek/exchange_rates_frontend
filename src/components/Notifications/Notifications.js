@@ -21,8 +21,15 @@ class Notifications extends Component {
     this.props.dispatch(ratesActions.deleteNotification(authToken, notificationId));    
   }
 
+  changeNotificationState(notification){
+    const authToken = localStorage.getItem('AuthUserToken');
+    notification.is_active = !notification.is_active;
+    this.props.dispatch(ratesActions.updateNotification(authToken, notification));
+  }
+
   displayNotifications(){
     let notificationsTable = this.props.notifications.map((notification, index) => {
+      console.log('notification.is_Active', notification.is_active);
       return (
         <tr key={index}>
           <td>
@@ -39,7 +46,12 @@ class Notifications extends Component {
             </FormControl>
           </td>
           <td>
-            <Switch value={notification.is_active} />
+            <Switch
+              value={notification.is_active}
+              onColor="success"
+              offColor="warning"
+              onChange={this.changeNotificationState.bind(this, notification)}
+            />
           </td>
           <td>
             <Button 
