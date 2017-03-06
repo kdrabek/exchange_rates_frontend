@@ -23,7 +23,6 @@ export function loadRatesForDate(date){
 }
 
 export function loadRatesForCurrency(token, currency, days = 5){
-  console.log('dispatching action: loadRatesForCurrency');
   return function(dispatch) {
     return ratesApi.getRatesForCurrency(token, currency, days)
       .then(rates_details =>{
@@ -129,3 +128,19 @@ export function registerUserError(err) {
     authenticated: false
   }
 }
+
+export function loadNotifications(token){
+  return function(dispatch) {
+    return ratesApi.getNotifications(token)
+      .then(notifications => {
+        dispatch(notificationsLoaded(notifications));
+      })
+      .catch(err => { throw err; });
+  };
+}
+
+export function notificationsLoaded(notifications) {
+  return {
+    type: actionTypes.NOTIFICATIONS_LOADED, notifications
+  };
+}  

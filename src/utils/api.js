@@ -33,6 +33,23 @@ class Api {
     }).catch(err => {return err;});
   }
 
+  getNotifications(token) {
+    const url = `/notifications/${token}`;
+    let headers = new Headers();
+    headers.append('Authorization', `Token ${token}`);
+
+    return fetch(
+      `${BASE_API_URL}${url}`,
+      {
+        method: 'GET',
+        headers: headers,
+        mode: 'cors'
+      }
+    ).then(response => {
+      return response.json();
+    }).catch(err => {return err;});
+  }
+
   login(user) {
     const url = '/auth/login';
     return fetch(`${BASE_API_URL}${url}`, {

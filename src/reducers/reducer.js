@@ -7,8 +7,8 @@ const rates = (state = {}, action) => {
     case actionTypes.RATES_LOADED: {
       return {
         ...state,
-        'rates': action.rates.rates,
-        'tableDate': action.rates.table_date
+        rates: action.rates.rates,
+        tableDate: action.rates.table_date
       };
     }
     default:
@@ -21,8 +21,8 @@ function ratesDetails(state = {}, action) {
     case actionTypes.RATES_DETAILS_LOADED: {
       return {
         ...state,
-        'rates': action.rates_details.rates,
-        'limit': action.rates_details.limit
+        rates: action.rates_details.rates,
+        limit: action.rates_details.limit
       };
     }
     default:
@@ -77,10 +77,23 @@ function user(state = {}, action) {
   }
 }
 
+const notifications = (state = {}, action) => {
+  switch (action.type) {
+    case actionTypes.NOTIFICATIONS_LOADED: {
+      return {
+        ...state,
+        notifications: action.notifications.notifications
+      };
+    }
+    default:
+      return state;
+  }
+};
 
 export default combineReducers({
   rates,
   ratesDetails,
   user,
+  notifications,
   form: formReducer
 });
