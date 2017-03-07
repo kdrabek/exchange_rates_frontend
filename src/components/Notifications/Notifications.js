@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Table, FormControl, Button } from 'react-bootstrap';
+import { Row, Col, Table, FormControl, Button, FormGroup, ControlLabel, Form } from 'react-bootstrap';
 import Switch from 'react-bootstrap-switch';
 import { connect } from 'react-redux';
 
@@ -14,6 +14,7 @@ class Notifications extends Component {
   componentDidMount() {
     const authToken = localStorage.getItem('AuthUserToken');
     this.props.dispatch(ratesActions.loadNotifications(authToken));
+    this.props.dispatch(ratesActions.loadCurrencies(authToken));
   }
   
   deleteNotification(notificationId) {
@@ -29,7 +30,6 @@ class Notifications extends Component {
 
   displayNotifications(){
     let notificationsTable = this.props.notifications.map((notification, index) => {
-      console.log('notification.is_Active', notification.is_active);
       return (
         <tr key={index}>
           <td>
@@ -62,71 +62,105 @@ class Notifications extends Component {
         </tr>
       );
     });
-    return (
-      <Table striped hover>
-        <thead>
-          <tr>
-            <th>Waluta</th>
-            <th>Próg</th>
-            <th>Warunek</th>
-            <th>Aktywna</th>
-          </tr>
-        </thead>
-        <tbody>
-          {notificationsTable}
+    return notificationsTable;
+  }
 
-          <tr>
-            <td>
-              <FormControl componentClass="select" placeholder="select">
-                <option value="select" selected>AUD</option>
-              </FormControl>
-            </td>
-            <td>
-              <FormControl type="number" step="0.01" min="0" value="0.00" />
-            </td>
-            <td>
-              <FormControl componentClass="select" placeholder="select">
-                <option value="select" selected>powyżej</option>
-              </FormControl>
-            </td>
-            <td>
-              <Switch />
-            </td>
-            <td>
-              <Button bsStyle="success">Dodaj</Button>
-            </td>
-          </tr>
-        </tbody>
-      </Table>
+  submitForm(e){
+    e.preventDefault();
+    const authToken = localStorage.getItem('AuthUserToken');
+    const newNotification = {
+      code: e.target.currency.value,
+      rate: parseFloat(e.target.rate.value),
+      threshold: e.target.threshold.value,
+      is_active: true
+    };
+    console.log(newNotification);
+    this.props.dispatch(ratesActions.addNotification(authToken, newNotification));
+  }
+
+  displayAddNotificationForm() {
+    const currencySelect = this.props.currencies ? this.props.currencies.map(currency => {
+      return <option
+        value={currency.code}>{currency.code} ({currency.country})</option>
+      }
+    ) : <option></option>;
+    return (
+      <Form onSubmit={this.submitForm.bind(this)}>
+        <FormGroup>
+          <ControlLabel>Waluta</ControlLabel>
+          <FormControl componentClass="select" placeholder="select" name="currency">
+            {currencySelect}
+          </FormControl>
+        </FormGroup>
+
+        <FormGroup>
+          <ControlLabel>Próg</ControlLabel>
+          <FormControl type="number" step="0.01" min="0" placeholder="0.00" name="rate" required/>
+        </FormGroup>
+
+        <FormGroup>
+          <ControlLabel>Warunek</ControlLabel>
+          <FormControl componentClass="select" placeholder="select" name="threshold">
+            <option value="ABOVE" selected>powyżej</option>
+            <option value="BELOW">poniżej</option>
+          </FormControl>
+        </FormGroup>
+
+        <FormGroup>
+          <Button type="submit" bsStyle="success" >Dodaj</Button>
+        </FormGroup>
+      </Form>
     )
   }
   
   render() {
     const notificationsTable = this.props.notifications ? this.displayNotifications() : 'Sciagam...';
+    const notificationsForm = this.displayAddNotificationForm();
     return (
-      <Row>
-        <Col md={3}>
-          <h4>Jak to działa?</h4>
-          <hr/>
-          <ul>
-            <li><p>Notifikacje wysyłane są <em>raz dziennie</em>, po ściągnięciu aktualnych kursów walut.</p></li>
-            <li><p>Notyfikacja zostanie wysłana tylko wtedy, jeśli wybrany warunek jest spełniony (kurs powyżej lub poniżej progu).</p></li>
-            <li><p>Tylko <em>aktywne</em> notyfikacje będą wysyłane.</p></li>
-          </ul>
-        </Col>
-        <Col md={9}>
-          <h4>Moje notyfikacje</h4>
-          <hr/>
-          {notificationsTable}
-        </Col>
-      </Row>
+      <div>
+        <Row>
+          <Col md={3}>
+            <h4>Jak to działa?</h4>
+            <hr/>
+            <ul>
+              <li><p>Notyfikacja zostanie wysłana tylko wtedy, jeśli wybrany warunek jest spełniony (kurs powyżej lub poniżej progu).</p></li>
+              <li><p>Tylko <em>aktywne</em> notyfikacje będą wysyłane.</p></li>
+            </ul>
+          </Col>
+          <Col md={9}>
+            <h4>Moje notyfikacje</h4>
+            <hr/>
+            <Table striped hover>
+              <thead>
+                <tr>
+                  <th>Waluta</th>
+                  <th>Próg</th>
+                  <th>Warunek</th>
+                  <th>Aktywna</th>
+                </tr>
+              </thead>
+              <tbody>
+                {notificationsTable}
+              </tbody>
+            </Table>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={4} mdOffset={3}>
+            <h4>Dodaj nową notyfikację</h4>
+            {notificationsForm}
+          </Col>
+        </Row>
+      </div>  
     );
+    
   }
 }
 
 function mapStateToProps(state, ownProps) {
   return {
-    notifications: state.notifications.notifications
+    notifications: state.notifications.notifications,
+    currencies: state.currencies.currencies
   };
 }
 

@@ -103,6 +103,31 @@ const notifications = (state = {}, action) => {
         notifications: newNotifications
       };
     }
+
+    case actionTypes.NOTIFICATION_ADDED: {
+      const addedNotification = {
+        ...action.notification,
+        currency: action.notification.code,
+        id: action.notificaionId
+      }; // inconsistent API, need to be changed on backend
+      return {
+        ...state,
+        notifications: state.notifications.concat(addedNotification)
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+const currencies = (state = {}, action) => {
+  switch (action.type) {
+    case actionTypes.CURRENCIES_LOADED: {
+      return {
+        ...state,
+        currencies: action.currencies.currencies
+      };
+    }
     default:
       return state;
   }
@@ -113,5 +138,6 @@ export default combineReducers({
   ratesDetails,
   user,
   notifications,
+  currencies,
   form: formReducer
 });

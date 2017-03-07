@@ -171,8 +171,42 @@ export function updateNotification(token, notification){
   };
 }
 
+export function addNotification(token, notification){
+  return function(dispatch) {
+    return ratesApi.addNotification(token, notification)
+      .then((resp) => {
+        dispatch(notificationAdded(resp.id, notification));
+      })
+      .catch(err => { throw err; });
+  };
+}
+
 export function notificationUpdated(notification) {
   return {
     type: actionTypes.NOTIFICATION_UPDATED, notification
   };
-}  
+}
+
+export function notificationAdded(notificationId, notification) {
+  return {
+    type: actionTypes.NOTIFICATION_ADDED, notification, notificationId
+  };
+}
+
+export function loadCurrencies(token) {
+  return function (dispatch) {
+    return ratesApi.getCurrencies(token)
+      .then(notifications => {
+        dispatch(currenciesLoaded(notifications));
+      })
+      .catch(err => {
+        throw err;
+      });
+  };
+}
+
+export function currenciesLoaded(currencies) {
+  return {
+    type: actionTypes.CURRENCIES_LOADED, currencies
+  };
+}
