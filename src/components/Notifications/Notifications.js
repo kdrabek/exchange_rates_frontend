@@ -30,6 +30,7 @@ class Notifications extends Component {
 
   displayNotifications(){
     let notificationsTable = this.props.notifications.map((notification, index) => {
+      
       return (
         <tr key={index}>
           <td>

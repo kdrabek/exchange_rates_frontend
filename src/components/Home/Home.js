@@ -22,7 +22,7 @@ class Home extends Component {
 
   notificationsButton() {
     return (
-      <Link to="notifications">
+      <Link to="/notifications">
         <Button bsStyle="primary" block>Przejdź do notyfikacji</Button>
       </Link>
     );

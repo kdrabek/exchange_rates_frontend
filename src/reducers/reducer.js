@@ -108,7 +108,7 @@ const notifications = (state = {}, action) => {
       const addedNotification = {
         ...action.notification,
         currency: action.notification.code,
-        id: action.notificaionId
+        id: action.notificationId
       }; // inconsistent API, need to be changed on backend
       return {
         ...state,

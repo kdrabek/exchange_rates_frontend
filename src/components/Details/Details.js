@@ -77,7 +77,7 @@ class Details extends Component {
               onChange={this.handleChange.bind(this)}
             />
           </FormGroup>
-          <Link to="notifications">
+          <Link to="/notifications">
             <Button bsStyle="primary" block>Przejdź do notyfikacji</Button>
           </Link>
         </Col>
