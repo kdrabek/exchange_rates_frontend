@@ -1,11 +1,8 @@
 import React from 'react';
 import { Row, Col, PageHeader } from 'react-bootstrap';
 
-import './Tagline.css';
-
-class Tagline extends React.Component {
-  render() {
-    return (
+const Tagline = (props) => {
+  return (
     <Row>
       <Col xs={12} md={12}>
         <PageHeader>
@@ -13,8 +10,7 @@ class Tagline extends React.Component {
         </PageHeader>
       </Col>
     </Row>
-    );
-  }
-}
+  );
+};
 
 export default Tagline;

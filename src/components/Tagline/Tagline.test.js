@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Tagline from './Tagline';
 import renderer from 'react-test-renderer';
 
-test('App component matches the snapshot', () => {
+test('Tagline component matches the snapshot', () => {
   const component = renderer.create(
-    <App />
+    <Tagline />
   );
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
