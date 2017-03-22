@@ -196,8 +196,8 @@ export function notificationAdded(notificationId, notification) {
 export function loadCurrencies(token) {
   return function (dispatch) {
     return ratesApi.getCurrencies(token)
-      .then(notifications => {
-        dispatch(currenciesLoaded(notifications));
+      .then(response => {
+        dispatch(currenciesLoaded(response.currencies));
       })
       .catch(err => {
         throw err;

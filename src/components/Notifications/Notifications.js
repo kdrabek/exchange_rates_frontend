@@ -80,7 +80,8 @@ class Notifications extends Component {
   }
 
   displayAddNotificationForm() {
-    const currencySelect = this.props.currencies ? this.props.currencies.map(currency => {
+    console.log('this.props.currencies', this.props.currencies);
+    const currencySelect = this.props.currencies.length ? this.props.currencies.map(currency => {
       return <option
         value={currency.code}>{currency.code} ({currency.country})</option>
       }
@@ -159,9 +160,10 @@ class Notifications extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+  console.log(state.currencies);
   return {
     notifications: state.notifications.notifications,
-    currencies: state.currencies.currencies
+    currencies: state.currencies
   };
 }
 
