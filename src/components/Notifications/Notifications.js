@@ -30,7 +30,6 @@ class Notifications extends Component {
 
   displayNotifications(){
     let notificationsTable = this.props.notifications.map((notification, index) => {
-      
       return (
         <tr key={index}>
           <td>
@@ -75,12 +74,10 @@ class Notifications extends Component {
       threshold: e.target.threshold.value,
       is_active: true
     };
-    console.log(newNotification);
     this.props.dispatch(ratesActions.addNotification(authToken, newNotification));
   }
 
   displayAddNotificationForm() {
-    console.log('this.props.currencies', this.props.currencies);
     const currencySelect = this.props.currencies.length ? this.props.currencies.map(currency => {
       return <option
         value={currency.code}>{currency.code} ({currency.country})</option>
@@ -160,9 +157,8 @@ class Notifications extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log(state.currencies);
   return {
-    notifications: state.notifications.notifications,
+    notifications: state.notifications,
     currencies: state.currencies
   };
 }

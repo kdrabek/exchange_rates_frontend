@@ -110,7 +110,6 @@ class Details extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('mapStateToProps', state);
   return {
     ratesDetails: state.ratesDetails.rates
   };

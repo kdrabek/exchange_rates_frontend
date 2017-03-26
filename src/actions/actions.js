@@ -26,7 +26,6 @@ export function loadRatesForCurrency(token, currency, days = 5){
   return function(dispatch) {
     return ratesApi.getRatesForCurrency(token, currency, days)
       .then(rates_details =>{
-        console.log('action loadRatesForCurrency: ', rates_details);
         dispatch(ratesDetailsLoaded(rates_details));
       })
       .catch(err => { throw err; });
@@ -132,8 +131,8 @@ export function registerUserError(err) {
 export function loadNotifications(token){
   return function(dispatch) {
     return ratesApi.getNotifications(token)
-      .then(notifications => {
-        dispatch(notificationsLoaded(notifications));
+      .then(response => {
+        dispatch(notificationsLoaded(response.notifications));
       })
       .catch(err => { throw err; });
   };
@@ -164,9 +163,7 @@ export function notificationDeleted(notificationId) {
 export function updateNotification(token, notification){
   return function(dispatch) {
     return ratesApi.updateNotification(token, notification)
-      .then(() => {
-        dispatch(notificationUpdated(notification));
-      })
+      .then(response => dispatch(notificationUpdated(response)))
       .catch(err => { throw err; });
   };
 }
@@ -174,9 +171,7 @@ export function updateNotification(token, notification){
 export function addNotification(token, notification){
   return function(dispatch) {
     return ratesApi.addNotification(token, notification)
-      .then((resp) => {
-        dispatch(notificationAdded(resp.id, notification));
-      })
+      .then(response => dispatch(notificationAdded(response)))
       .catch(err => { throw err; });
   };
 }
@@ -187,9 +182,9 @@ export function notificationUpdated(notification) {
   };
 }
 
-export function notificationAdded(notificationId, notification) {
+export function notificationAdded(notification) {
   return {
-    type: actionTypes.NOTIFICATION_ADDED, notification, notificationId
+    type: actionTypes.NOTIFICATION_ADDED, notification
   };
 }
 

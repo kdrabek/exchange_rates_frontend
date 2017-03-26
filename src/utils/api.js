@@ -39,14 +39,9 @@ class Api {
     headers.append('Authorization', `Token ${token}`);
 
     return fetch(
-      `${BASE_API_URL}${url}`,
-      {
-        method: 'GET',
-        headers: headers,
-        mode: 'cors'
-      }
-    ).then(response => {
-      return response.json();
+      `${BASE_API_URL}${url}`, {method: 'GET', headers: headers, mode: 'cors'}
+    ).then(response => { 
+      return response.json(); 
     }).catch(err => {return err;});
   }
   
@@ -63,7 +58,7 @@ class Api {
         mode: 'cors'
       }
     ).then(response => {
-      return response.json();
+      return {id: notificationId};
     }).catch(err => {return err;});
   }
 
@@ -71,7 +66,6 @@ class Api {
     const url = `/notifications/${token}/${notification.id}`;
     let headers = new Headers();
     headers.append('Authorization', `Token ${token}`);
-
     return fetch(
       `${BASE_API_URL}${url}`,
       {
@@ -80,16 +74,17 @@ class Api {
         mode: 'cors',
         body: JSON.stringify(notification)
       }
-    ).then(response => {
-      return response.json();
-    }).catch(err => {return err;});
+    ).then(
+      response => response.json()
+    ).catch(
+      err => {return err;}
+    );
   }
   
   addNotification(token, notification) {
     const url = `/notifications/${token}`;
     let headers = new Headers();
     headers.append('Authorization', `Token ${token}`);
-
     return fetch(
       `${BASE_API_URL}${url}`,
       {
@@ -98,8 +93,9 @@ class Api {
         mode: 'cors',
         body: JSON.stringify(notification)
       }
+    ).then(response => response.json()
     ).then(response => {
-      return response.json();
+      return {id: response.id, ...notification};
     }).catch(err => {return err;});
   }
 
