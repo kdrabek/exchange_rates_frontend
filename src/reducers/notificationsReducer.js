@@ -1,42 +1,35 @@
 import * as actionTypes from '../actions/actionTypes';
 
-export const notifications = (state = {}, action) => {
+export const notifications = (state = [], action) => {
+
   switch (action.type) {
     case actionTypes.NOTIFICATIONS_LOADED: {
-      return {
-        ...state,
-        notifications: action.notifications.notifications
-      };
+      return [...state, ...action.notifications];
     }
+
     case actionTypes.NOTIFICATION_DELETED: {
-      return {
-        ...state,
-        notifications: state.notifications.filter(
-          notification => notification.id !== action.notificationId)
-      };
+      return [
+        ...state.filter(notification => notification.id !== action.notificationId)
+      ];
     }
+
     case actionTypes.NOTIFICATION_UPDATED: {
-      const newNotifications = [...state.notifications];
+      const newNotifications = [...state];
       const notificationToUpdate = newNotifications.findIndex(
         notification => notification.id === action.notification.id);
       newNotifications[notificationToUpdate] = action.notification;
 
-      return {
-        ...state,
-        notifications: newNotifications
-      };
+      return [...newNotifications];
     }
 
     case actionTypes.NOTIFICATION_ADDED: {
       const addedNotification = {
         ...action.notification,
         currency: action.notification.code,
-        id: action.notificationId
+        id: action.notification.id
       }; // inconsistent API, need to be changed on backend
-      return {
-        ...state,
-        notifications: state.notifications.concat(addedNotification)
-      };
+  
+      return [...state, addedNotification];
     }
     default:
       return state;
