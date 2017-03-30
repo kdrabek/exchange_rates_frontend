@@ -1,0 +1,136 @@
+exports[`AppNavbar component matches the snapshot when user authenticated 1`] = `
+<nav
+  className="navbar navbar-inverse">
+  <div
+    className="container-fluid">
+    <div
+      className="row">
+      <div
+        Col={true}
+        className="col-md-8 col-md-push-2">
+        <div
+          className="navbar-header">
+          <a
+            className="navbar-brand"
+            onClick={[Function]}
+            style={Object {}}>
+            Exchange Rates
+          </a>
+        </div>
+        <div
+          aria-expanded={null}
+          className="navbar-collapse collapse">
+          <ul
+            className="nav navbar-nav navbar-right"
+            role={null}>
+            <li
+              className=""
+              role="presentation"
+              style={undefined}>
+              <a
+                href="#"
+                onClick={[Function]}
+                role="button">
+                Witaj, 
+                <strong>
+                  email@user.com
+                </strong>
+              </a>
+            </li>
+            <li
+              className=""
+              role="presentation"
+              style={undefined}>
+              <a
+                href="#"
+                onClick={[Function]}
+                role="button">
+                <button
+                  className="btn btn-danger"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button">
+                  Wyloguj się
+                </button>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+`;
+
+exports[`AppNavbar component matches the snapshot when user not authenticated 1`] = `
+<nav
+  className="navbar navbar-inverse">
+  <div
+    className="container-fluid">
+    <div
+      className="row">
+      <div
+        Col={true}
+        className="col-md-8 col-md-push-2">
+        <div
+          className="navbar-header">
+          <a
+            className="navbar-brand"
+            onClick={[Function]}
+            style={Object {}}>
+            Exchange Rates
+          </a>
+        </div>
+        <div
+          aria-expanded={null}
+          className="navbar-collapse collapse">
+          <ul
+            className="nav navbar-nav navbar-right"
+            role={null}>
+            <li
+              className=""
+              role="presentation"
+              style={undefined}>
+              <a
+                href="#"
+                onClick={[Function]}
+                role="button">
+                <a
+                  onClick={[Function]}
+                  style={Object {}}>
+                  <button
+                    className="btn btn-success"
+                    disabled={false}
+                    type="button">
+                    Zaloguj się
+                  </button>
+                </a>
+              </a>
+            </li>
+            <li
+              className=""
+              role="presentation"
+              style={undefined}>
+              <a
+                href="#"
+                onClick={[Function]}
+                role="button">
+                <a
+                  onClick={[Function]}
+                  style={Object {}}>
+                  <button
+                    className="btn btn-warning"
+                    disabled={false}
+                    type="button">
+                    Zarejestruj się
+                  </button>
+                </a>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+`;
