@@ -64,7 +64,7 @@ class Register extends Component {
                 type="submit"
                 disabled={this.props.submitting}
                 block>
-                 Zarejestruj się.
+                 Zarejestruj się
               </Button>
               <Button
                 bsStyle="warning"
@@ -89,5 +89,7 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default reduxForm({form: 'registerForm'})(connect(mapStateToProps)(Register));
+export default reduxForm({form: 'registerForm'})(
+  connect(mapStateToProps)(Register)
+);
 

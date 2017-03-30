@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Row, Col, FormControl, Button, ControlLabel, FormGroup, Form } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+
+import { 
+  Row, Col, FormControl, Button, ControlLabel, FormGroup, Form 
+} from 'react-bootstrap';
 
 import './Login.css';
 import * as ratesActions from '../../actions/actions';
@@ -45,6 +48,7 @@ class Login extends Component {
                 label="Hasło"
                 validate={required}
               />
+
               {this.props.error && <div className="error-field">{this.props.error}</div>}
               {this.props.apiError && <div className="error-field">{plLoginErrors[this.props.apiError]}</div>}
 
@@ -53,7 +57,7 @@ class Login extends Component {
                 type="submit"
                 disabled={this.props.submitting}
                 block>
-                Zaloguj się.
+                Zaloguj się
               </Button>
               <Button
                 bsStyle="warning"
@@ -78,4 +82,6 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default reduxForm({form: 'loginForm'})(connect(mapStateToProps)(Login));
+export default reduxForm({form: 'loginForm'})(
+  connect(mapStateToProps)(Login)
+);

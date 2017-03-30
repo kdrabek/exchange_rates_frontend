@@ -47,11 +47,14 @@ export function ratesDetailsLoaded(rates_details) {
 export function loginUser(user){
   return function(dispatch){
     return ratesApi.login(user)
-      .then(loggedInUser =>{
-        localStorage.setItem('AuthUserToken', loggedInUser.token);
-        localStorage.setItem('AuthUserEmail', user.email);
-        dispatch(loginUserComplete(loggedInUser));
-        browserHistory.push('/');
+      .then(response =>{
+        if (response.token) {
+          localStorage.setItem('AuthUserToken', response.token);
+          localStorage.setItem('AuthUserEmail', user.email);
+          dispatch(loginUserComplete(response));
+          browserHistory.push('/');
+        };
+        dispatch(loginUserError(response));
       })
       .catch(err => {
         dispatch(loginUserError(err));
