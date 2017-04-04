@@ -66,7 +66,6 @@ class Api {
       request.headers = this._prepareHeaders(token);
     if (body)
       request.body = JSON.stringify(body);
-
     return fetch(
       `${BASE_API_URL}${url}`, request
       ).then(
