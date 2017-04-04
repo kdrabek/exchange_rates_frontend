@@ -4,7 +4,7 @@ export const notifications = (state = [], action) => {
 
   switch (action.type) {
     case actionTypes.NOTIFICATIONS_LOADED: {
-      return [...state, ...action.notifications];
+      return [...action.notifications];
     }
 
     case actionTypes.NOTIFICATION_DELETED: {

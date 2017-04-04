@@ -1,4 +1,4 @@
-const BASE_API_URL = 'http://localhost';
+export const BASE_API_URL = 'http://localhost';
 
 class Api {
   
@@ -66,13 +66,13 @@ class Api {
       request.headers = this._prepareHeaders(token);
     if (body)
       request.body = JSON.stringify(body);
-    console.log("request", request);
+
     return fetch(
       `${BASE_API_URL}${url}`, request
       ).then(
-        response => { console.log("server response", response);return response.json()}
+        response => response.json()
       ).catch(
-        err => {return err;}
+        err => err
       );
   }
 
