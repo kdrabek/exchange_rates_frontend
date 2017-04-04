@@ -6,13 +6,9 @@ import {
 class Chart extends React.Component {
 
   render() {
+    const marginData = { top: 5, right: 30, left: 40, bottom: 5 };
     return (
-      <LineChart 
-        width={700} 
-        height={400} 
-        data={this.props.data}
-        margin={ { top: 5, right: 30, left: 40, bottom: 5 } }
-      >
+      <LineChart width={700} height={400} data={this.props.data} margin={marginData}>
          <XAxis dataKey="date"/>
          <YAxis scale="auto" domain={['dataMin', 'dataMax']}/>
          <CartesianGrid strokeDasharray="3 3"/>

@@ -1,4 +1,4 @@
-const BASE_API_URL = 'http://localhost';
+export const BASE_API_URL = 'http://localhost';
 
 class Api {
   
@@ -61,18 +61,17 @@ class Api {
   }
 
   _fetch(method, url, token=null, body=null){
-    let request = {method: method, mode: 'cors'}
+    let request = {method: method, mode: 'cors'};
     if (token)
-      request.headers = this._prepareHeaders(token)
+      request.headers = this._prepareHeaders(token);
     if (body)
-      request.body = JSON.stringify(body)
-  
+      request.body = JSON.stringify(body);
     return fetch(
       `${BASE_API_URL}${url}`, request
       ).then(
         response => response.json()
       ).catch(
-        err => {return err;}
+        err => err
       );
   }
 

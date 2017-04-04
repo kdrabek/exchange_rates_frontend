@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 import { 
   Col, Row, Button, Table, FormGroup, ControlLabel, FormControl 
 } from 'react-bootstrap';
 
 import Chart from '../Chart/Chart';
 import * as ratesActions from '../../actions/actions';
-import { connect } from 'react-redux';
-
 import { currencyCodePictures } from '../../utils/currencyCodes';
 import './Details.css';
 
@@ -30,16 +29,14 @@ class Details extends Component {
       )
     );
   }
-  render() {
-    const currencyCode = this.props.routeParams.currencyCode;
+
+  prepareTable() {
     const increaseArrow = <span className="green">&#8599;</span>;
     const decreaseArrow = <span className="red">&#8600;</span>;
     let ratesTable = null;
 
-    let data = [];
-
     if (this.props.ratesDetails) {
-      ratesTable = this.props.ratesDetails.map((rate, index) => {
+      return this.props.ratesDetails.map((rate, index) => {
         return (
           <tr key={index}>
             <td>{index + 1}</td>
@@ -52,12 +49,21 @@ class Details extends Component {
         );
       });
 
-      data = this.props.ratesDetails.map(rate => {
+    } else {
+      return ratesTable = <tr><td>Sciagam</td></tr>;
+    }
+  }
+
+  prepareChartData() {
+    const ratesDetails = this.props.ratesDetails;
+    return !ratesDetails ? [] : ratesDetails.map(
+      rate => { 
         return { date: rate.date, rate: parseFloat(rate.rate) };
       });
-    } else {
-      ratesTable = <tr><td>Sciagam</td></tr>;
-    }
+  }
+
+  render() {
+    const currencyCode = this.props.routeParams.currencyCode;
     return (
       <Row>
         <Col xs={3} md={3}>
@@ -88,7 +94,7 @@ class Details extends Component {
             <img src={currencyCodePictures[currencyCode]} />
              &nbsp;{ this.props.ratesDetails ? this.props.ratesDetails[0].name : ''}
              </h4>
-          <Chart data={data.reverse()}/>
+          <Chart data={this.prepareChartData().reverse()}/>
           <hr />
           <Table striped hover>
             <thead>
@@ -100,7 +106,7 @@ class Details extends Component {
               </tr>
             </thead>
             <tbody>
-            {ratesTable}
+            {this.prepareTable()}
             </tbody>
           </Table>
         </Col>

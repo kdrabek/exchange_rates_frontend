@@ -4,7 +4,7 @@ import { Button, Navbar, Nav, NavItem, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as ratesActions from '../../actions/actions';
 
-class AppNavbar extends React.Component {
+export class AppNavbar extends React.Component {
 
   handleLogout(){
     this.props.dispatch(ratesActions.logoutUser())
@@ -42,8 +42,7 @@ class AppNavbar extends React.Component {
 
   render() {
     const isAuthenticated = (
-      localStorage.getItem('AuthUserToken') !== null &&
-      localStorage.getItem('AuthUserEmail') !== null
+      localStorage.getItem('AuthUserToken') && localStorage.getItem('AuthUserEmail')
     );
     const navButtons = isAuthenticated ? this.authenticatedMenu() : this.unauthenticatedMenu();
     return (
