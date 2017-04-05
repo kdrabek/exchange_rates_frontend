@@ -141,6 +141,128 @@ describe('Currencies Endpoint', () => {
 })
 
 
+describe('Notifications Endpoint', () => {
+
+  const token = 'token';
+  const notificationId = 2;
+  const newNotification =  {
+      currency: "AUD",
+      rate: "12.00",
+      threshold: "BELOW",
+      is_active: true
+    };
+  const updateNotification = {...newNotification, rate: "9.99", id: 2};
+
+  beforeAll(()=>{
+    const getResp = {
+      notifications: [{
+        id: 2, currency: "AUD", rate: "12.00", threshold: "BELOW", is_active: true
+      }]
+    };
+    fetchMock.get(
+      `${BASE_API_URL}/notifications/${token}`, getResp
+    );
+    fetchMock.post(
+      `${BASE_API_URL}/notifications/${token}`, {id: 3, ...newNotification}
+    );
+    fetchMock.put(
+      `${BASE_API_URL}/notifications/${token}/${notificationId}`, updateNotification
+    );
+    fetchMock.delete(
+      `${BASE_API_URL}/notifications/${token}/${notificationId}`, {id: notificationId}
+    );
+  });
+
+  it('(getNotifications) should use proper request params', (done) => {
+    
+    return ratesApi.getNotifications(token).then(resp => {
+      const mockCallParams = fetchMock.lastCall()
+      
+      expect(mockCallParams[1]).toEqual({
+        method: 'GET', mode: 'cors', headers: ratesApi._prepareHeaders(token)
+      });
+      done();
+    });
+  });
+
+  it('(getNotifications) should use return data in correct format', (done) => {
+    
+    return ratesApi.getNotifications(token).then(resp => {
+      expect(resp).toHaveProperty('notifications');
+      expect(resp.notifications.length).toBe(1);
+      done();
+    });
+
+  });
+
+  it('(deleteNotification) should use proper request params', (done) => {
+    
+    return ratesApi.deleteNotification(token, notificationId).then(resp => {
+      const mockCallParams = fetchMock.lastCall()
+      
+      expect(mockCallParams[1]).toEqual({
+        method: 'DELETE', mode: 'cors', headers: ratesApi._prepareHeaders(token),
+        body: JSON.stringify(notificationId)
+      });
+      done();
+    });
+  });
+
+  it('(deleteNotifications) should use return data in correct format', (done) => {
+    
+    return ratesApi.deleteNotification(token, notificationId).then(resp => {
+      expect(resp.id).toEqual(notificationId);
+      done();
+    });
+
+  });
+
+  it('(addNotification) should use proper request params', (done) => {
+    
+    return ratesApi.addNotification(token, newNotification).then(resp => {
+      const mockCallParams = fetchMock.lastCall()
+      
+      expect(mockCallParams[1]).toEqual({
+        method: 'POST', mode: 'cors', headers: ratesApi._prepareHeaders(token),
+        body: JSON.stringify(newNotification)
+      });
+      done();
+    });
+  });
+
+  it('(addNotifications) should use return data in correct format', (done) => {
+    
+    return ratesApi.addNotification(token, newNotification).then(resp => {
+      expect(resp).toEqual({id: 3, ...newNotification});
+      done();
+    });
+
+  });
+
+  it('(updateNotification) should use proper request params', (done) => {
+    return ratesApi.updateNotification(token, updateNotification).then(resp => {
+      const mockCallParams = fetchMock.lastCall()
+      
+      expect(mockCallParams[1]).toEqual({
+        method: 'PUT', mode: 'cors', headers: ratesApi._prepareHeaders(token),
+        body: JSON.stringify(updateNotification)
+      });
+      done();
+    });
+  });
+
+  it('(updateNotifications) should use return data in correct format', (done) => {
+    
+    return ratesApi.updateNotification(token, updateNotification).then(resp => {
+      expect(resp).toEqual(updateNotification);
+      done();
+    });
+
+  });
+
+})
+
+
 describe('Auth Endpoint', () => {
 
   const testUser = {email: 'test@gmail.com', password: 'password'};
