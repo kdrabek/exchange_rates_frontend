@@ -1,5 +1,5 @@
-import { currencies as reducer } from './currenciesReducer';
-import * as actionTypes from '../actions/actionTypes';
+import { currencies as reducer } from '../currenciesReducer';
+import * as actionTypes from '../../actions/actionTypes';
 
 describe('currencies reducer', () => {
 

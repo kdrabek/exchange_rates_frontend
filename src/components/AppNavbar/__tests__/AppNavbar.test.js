@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 
-import LocalStorageMock from './__mocks__/storage';
+import LocalStorageMock from '../__mocks__/storage';
 window.localStorage = new LocalStorageMock(); 
 
-import { AppNavbar } from './AppNavbar';
+import { AppNavbar } from '../AppNavbar';
 
 describe('AppNavbar component', () => {
 
