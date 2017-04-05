@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 
-import Chart from './Chart';
+import Chart from '../Chart';
 
 describe('Chart component', () => {
 

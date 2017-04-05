@@ -1,5 +1,5 @@
 import fetchMock from 'fetch-mock';
-import Api, { BASE_API_URL } from './api';
+import Api, { BASE_API_URL } from '../api';
 
 const ratesApi = new Api();
 

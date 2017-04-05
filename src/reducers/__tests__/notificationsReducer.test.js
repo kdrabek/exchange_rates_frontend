@@ -1,5 +1,5 @@
-import { notifications as reducer } from './notificationsReducer';
-import * as actionTypes from '../actions/actionTypes';
+import { notifications as reducer } from '../notificationsReducer';
+import * as actionTypes from '../../actions/actionTypes';
 
 describe('notifications reducer', () => {
 

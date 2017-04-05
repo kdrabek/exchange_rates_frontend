@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Tagline from './Tagline';
+import Tagline from '../Tagline';
 import renderer from 'react-test-renderer';
 
 describe('Tagline component', () => {
