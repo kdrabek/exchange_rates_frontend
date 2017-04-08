@@ -40,7 +40,8 @@ class RatesTable extends Component {
 }
 
 RatesTable.propTypes = {
-
+  headers: PropTypes.array,
+  data: PropTypes.array
 };
 
 export default RatesTable;

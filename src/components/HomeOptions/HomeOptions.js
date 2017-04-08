@@ -39,7 +39,9 @@ class HomeOptions extends Component {
 }
 
 HomeOptions.propTypes = {
-
+  isAuthenticated: PropTypes.bool,
+  tableDate: PropTypes.string,
+  handleChange: PropTypes.func
 };
 
 export default HomeOptions;

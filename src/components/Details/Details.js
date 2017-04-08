@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { 
-  Col, Row, Button, Table, FormGroup, ControlLabel, FormControl 
-} from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import Chart from '../Chart/Chart';
 import * as ratesActions from '../../actions/actions';
@@ -27,7 +24,7 @@ class Details extends Component {
     const authToken = localStorage.getItem('AuthUserToken');
     this.props.dispatch(
       ratesActions.loadRatesForCurrency(
-        authToken, currencyCode, parseInt(e.target.value)
+        authToken, currencyCode, parseInt(e.target.value, 10)
       )
     );
   }
@@ -70,7 +67,7 @@ class Details extends Component {
           <h4>Widok szczegółowy</h4>
           <hr/>
           <h4 className="capitalize">
-            <img src={currencyCodePictures[currencyCode]} />
+            <img src={currencyCodePictures[currencyCode]} alt={currencyCode}/>
              &nbsp;{ this.props.ratesDetails ? this.props.ratesDetails[0].name : ''}
              </h4>
           <Chart data={this.prepareChartData().reverse()}/>

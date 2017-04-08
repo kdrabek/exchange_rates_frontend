@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap';
-import  DatePicker  from 'react-bootstrap-date-picker';
 
 class DetailsOptions extends Component {
 
@@ -33,7 +32,7 @@ class DetailsOptions extends Component {
 }
 
 DetailsOptions.propTypes = {
-
+  handleChange: PropTypes.func
 };
 
 export default DetailsOptions;
