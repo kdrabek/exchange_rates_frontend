@@ -5,8 +5,8 @@ export const rates = (state = {}, action) => {
     case actionTypes.RATES_LOADED: {
       return {
         ...state,
-        rates: action.rates.rates,
-        tableDate: action.rates.table_date
+        rates: action.rates,
+        tableDate: action.tableDate
       };
     }
     default:
@@ -19,8 +19,8 @@ export const ratesDetails = (state = {}, action) => {
     case actionTypes.RATES_DETAILS_LOADED: {
       return {
         ...state,
-        rates: action.rates_details.rates,
-        limit: action.rates_details.limit
+        rates: action.rates,
+        limit: action.limit
       };
     }
     default:
