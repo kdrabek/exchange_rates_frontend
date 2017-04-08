@@ -4,9 +4,7 @@ import * as actionTypes from '../../actions/actionTypes';
 describe('rates reducer', () => {
 
   it('should return initial state', () => {
-    expect(
-      rates(undefined, {})
-      ).toEqual({});
+    expect(rates(undefined, {})).toEqual({});
   });
 
   it('should handle RATES_LOADED action', () => {
@@ -44,10 +42,9 @@ describe('ratesDetails reducer', () => {
     const expectedState = {
       rates: action.rates,
       limit: action.limit
-    }
-    expect(
-      ratesDetails({}, action)
-      ).toEqual(expectedState);
+    };
+
+    expect(ratesDetails({}, action)).toEqual(expectedState);
   });
 
 });

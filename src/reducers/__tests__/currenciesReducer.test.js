@@ -4,9 +4,7 @@ import * as actionTypes from '../../actions/actionTypes';
 describe('currencies reducer', () => {
 
   it('should return initial state', () => {
-    expect(
-      reducer(undefined, {})
-      ).toEqual([]);
+    expect(reducer(undefined, {})).toEqual([]);
   });
 
   it('should handle CURRENCIES_LOADED action', () => {
@@ -16,8 +14,7 @@ describe('currencies reducer', () => {
         {name: 'some_currency'}
       ]
     };
-    expect(
-      reducer([], action)
-      ).toEqual(action.currencies);
+
+    expect(reducer([], action)).toEqual(action.currencies);
   });
 });
