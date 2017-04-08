@@ -7,8 +7,8 @@ const ratesApi = new Api();
 export function loadRates(){
   return function(dispatch) {
     return ratesApi.getCurrentRates()
-      .then(rates =>{
-        return dispatch(ratesLoaded(rates));
+      .then(response =>{
+        return dispatch(ratesLoaded(response));
       })
       .catch(err => { throw err; });
   };
@@ -25,22 +25,26 @@ export function loadRatesForDate(date){
 export function loadRatesForCurrency(token, currency, days = 5){
   return function(dispatch) {
     return ratesApi.getRatesForCurrency(token, currency, days)
-      .then(rates_details =>{
-        dispatch(ratesDetailsLoaded(rates_details));
+      .then(response =>{
+        dispatch(ratesDetailsLoaded(response));
       })
       .catch(err => { throw err; });
   };
 }
 
-export function ratesLoaded(rates) {
+export function ratesLoaded(response) {
   return {
-    type: actionTypes.RATES_LOADED, rates
+    type: actionTypes.RATES_LOADED, 
+    rates: response.rates, 
+    tableDate: response.table_date
   };
 }
 
-export function ratesDetailsLoaded(rates_details) {
+export function ratesDetailsLoaded(response) {
   return {
-    type: actionTypes.RATES_DETAILS_LOADED, rates_details
+    type: actionTypes.RATES_DETAILS_LOADED,
+    rates: response.rates,
+    limit: response.limit
   };
 }
 

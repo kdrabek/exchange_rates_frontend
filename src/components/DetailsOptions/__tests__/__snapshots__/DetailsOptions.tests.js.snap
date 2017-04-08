@@ -1,0 +1,36 @@
+exports[`DetailsOptions component matches the snapshot 1`] = `
+<div>
+  <h4
+    className="subheader">
+    Opcje
+  </h4>
+  <hr />
+  <div
+    className="form-group">
+    <label
+      className="control-label"
+      htmlFor="days-input">
+      Ilość dni do uwzględnienia:
+    </label>
+    <input
+      className="form-control"
+      id="days-input"
+      max="30"
+      min="3"
+      name="days"
+      onChange={[Function]}
+      placeholder="5"
+      type="number" />
+  </div>
+  <a
+    onClick={[Function]}
+    style={Object {}}>
+    <button
+      className="btn btn-primary btn-block"
+      disabled={false}
+      type="button">
+      Przejdź do notyfikacji
+    </button>
+  </a>
+</div>
+`;

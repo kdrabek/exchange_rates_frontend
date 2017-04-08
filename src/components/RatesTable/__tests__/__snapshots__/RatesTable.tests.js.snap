@@ -1,0 +1,62 @@
+exports[`RatesTable component matches the snapshot when data passed 1`] = `
+<table
+  className="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>
+        header1
+      </th>
+      <th>
+        header2
+      </th>
+      <th>
+        header3
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        row1_column1
+      </td>
+      <td>
+        row1_column2
+      </td>
+      <td>
+        row1_column2
+      </td>
+    </tr>
+    <tr>
+      <td>
+        row2_column1
+      </td>
+      <td>
+        row2_column2
+      </td>
+      <td>
+        row2_column2
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
+
+exports[`RatesTable component matches the snapshot when empty data 1`] = `
+<table
+  className="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>
+        header1
+      </th>
+      <th>
+        header2
+      </th>
+      <th>
+        header3
+      </th>
+    </tr>
+  </thead>
+  <tbody />
+</table>
+`;

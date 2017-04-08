@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Row, Col, FormGroup, ControlLabel, Table, Button } from 'react-bootstrap';
-import  DatePicker  from 'react-bootstrap-date-picker';
+import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
 import * as ratesActions from '../../actions/actions';
 import { currencyCodePictures } from '../../utils/currencyCodes';
-import { plDayLabels, plMonthLabels } from '../../utils/plLocale';
+import RatesTable from '../RatesTable/RatesTable';
+import HomeOptions from '../HomeOptions/HomeOptions';
 
 class Home extends Component {
 
@@ -20,78 +20,46 @@ class Home extends Component {
     this.props.dispatch(ratesActions.loadRatesForDate(formattedDate));
   }
 
-  notificationsButton() {
-    return (
-      <Link to="/notifications">
-        <Button bsStyle="primary" block>Przejdź do notyfikacji</Button>
-      </Link>
-    );
+  prepareTableData(){
+    if (!this.props.rates.rates) {
+      return [['Downloading...']];
+    } else {
+      return this.props.rates.rates.map((rate, index) => {
+        const linkTo = `/details/${rate.currency}`;
+        return [
+          <img src={currencyCodePictures[rate.currency]} alt={rate.currency}/>,
+          rate.country,
+          rate.name,
+          rate.currency,
+          rate.rate,
+          <Link to={linkTo}>Zobacz więcej...</Link>
+        ];
+      });
+    }
   }
 
   render() {
-    let ratesTable = null;
-    if (!this.props.rates.rates) {
-      ratesTable = <tr><td>Sciagam...</td></tr>;
-    } else {
-      ratesTable = this.props.rates.rates.map((rate, index) => {
-        const linkTo = `/details/${rate.currency}`;
-        return (
-          <tr key={index}>
-            <td>
-              <img src={currencyCodePictures[rate.currency]} alt={rate.currency}/>
-                {rate.country}
-            </td>
-            <td>{rate.name}</td>
-            <td>{rate.currency}</td>
-            <td>{rate.rate}</td>
-            <td>
-              <Link to={linkTo}>Zobacz więcej...</Link>
-            </td>
-          </tr>
-        );
-      });
-    }
     const isAuthenticated = (
       localStorage.getItem('AuthUserToken') !== null &&
       localStorage.getItem('AuthUserEmail') !== null
     );
-    const notificationBtn = isAuthenticated ? this.notificationsButton() : '';
     return (
     <Row>
       <Col xs={3} md={3}>
-        <h3 className="force-text-left">Opcje</h3>
-        <hr />
-        <FormGroup>
-          <ControlLabel>Wybierz datę: </ControlLabel>
-          <DatePicker
-            id="example-datepicker"
-            dateFormat="YYYY/MM/DD"
-            weekStartsOnMonday
-            dayLabels={plDayLabels}
-            monthLabels={plMonthLabels}
-            onChange={this.handleChange.bind(this)}
-            value={this.props.rates.tableDate}
-          />
-        </FormGroup>
-        {notificationBtn}
+        <HomeOptions 
+          isAuthenticated={isAuthenticated}
+          tableDate={this.props.rates.tableDate}
+          handleChange={this.handleChange.bind(this)}
+        />
       </Col>
       <Col xs={9} md={9}>
         <h3>Kursy walut ({this.props.rates.tableDate})</h3>
         <hr />
-        <Table striped hover className="force-text-left">
-        <thead>
-          <tr>
-            <th>Kraj</th>
-            <th>Waluta</th>
-            <th>Symbol</th>
-            <th>Kurs</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        {ratesTable}
-        </tbody>
-      </Table>
+        <RatesTable 
+          headers={[' ', 'Kraj', 'Waluta', 'Symbol', 'Kurs', ' ']} 
+          data={this.prepareTableData()}
+        />
+
       </Col>
     </Row>
     );

@@ -1,0 +1,144 @@
+exports[`HomeOptions component matches the snapshot when user authenticated 1`] = `
+<div>
+  <h3>
+    Opcje
+  </h3>
+  <hr />
+  <div
+    className="form-group">
+    <label
+      className="control-label"
+      htmlFor={undefined}>
+      Wybierz datę:
+    </label>
+    <span
+      className="input-group"
+      id="example-datepicker_group">
+      <div
+        style={
+          Object {
+            "position": "relative",
+          }
+        } />
+      <input
+        data-formattedvalue="2017/04/07"
+        id="example-datepicker"
+        name={undefined}
+        type="hidden"
+        value="2017-04-07T12:00:00.000Z" />
+      <input
+        autoFocus={false}
+        className="form-control"
+        disabled={false}
+        id={undefined}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        placeholder="YYYY/MM/DD"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+        type="text"
+        value="2017/04/07" />
+      <span
+        className="input-group-addon"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }>
+        <div
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }>
+          ×
+        </div>
+      </span>
+    </span>
+  </div>
+  <a
+    onClick={[Function]}
+    style={Object {}}>
+    <button
+      className="btn btn-primary btn-block"
+      disabled={false}
+      type="button">
+      Przejdź do notyfikacji
+    </button>
+  </a>
+</div>
+`;
+
+exports[`HomeOptions component matches the snapshot when user not authenticated 1`] = `
+<div>
+  <h3>
+    Opcje
+  </h3>
+  <hr />
+  <div
+    className="form-group">
+    <label
+      className="control-label"
+      htmlFor={undefined}>
+      Wybierz datę:
+    </label>
+    <span
+      className="input-group"
+      id="example-datepicker_group">
+      <div
+        style={
+          Object {
+            "position": "relative",
+          }
+        } />
+      <input
+        data-formattedvalue="2017/04/07"
+        id="example-datepicker"
+        name={undefined}
+        type="hidden"
+        value="2017-04-07T12:00:00.000Z" />
+      <input
+        autoFocus={false}
+        className="form-control"
+        disabled={false}
+        id={undefined}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        placeholder="YYYY/MM/DD"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+        type="text"
+        value="2017/04/07" />
+      <span
+        className="input-group-addon"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }>
+        <div
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }>
+          ×
+        </div>
+      </span>
+    </span>
+  </div>
+  
+</div>
+`;
