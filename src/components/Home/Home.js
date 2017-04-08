@@ -9,6 +9,7 @@ import * as ratesActions from '../../actions/actions';
 import { currencyCodePictures } from '../../utils/currencyCodes';
 import { plDayLabels, plMonthLabels } from '../../utils/plLocale';
 import RatesTable from '../RatesTable/RatesTable';
+import HomeOptions from '../HomeOptions/HomeOptions';
 
 class Home extends Component {
 
@@ -19,14 +20,6 @@ class Home extends Component {
   handleChange(date) {
     const formattedDate = moment(date).format('YYYY-MM-DD');
     this.props.dispatch(ratesActions.loadRatesForDate(formattedDate));
-  }
-
-  notificationsButton() {
-    return (
-      <Link to="/notifications">
-        <Button bsStyle="primary" block>Przejdź do notyfikacji</Button>
-      </Link>
-    );
   }
 
   prepareTableData(){
@@ -52,25 +45,14 @@ class Home extends Component {
       localStorage.getItem('AuthUserToken') !== null &&
       localStorage.getItem('AuthUserEmail') !== null
     );
-    const notificationBtn = isAuthenticated ? this.notificationsButton() : '';
     return (
     <Row>
       <Col xs={3} md={3}>
-        <h3 className="force-text-left">Opcje</h3>
-        <hr />
-        <FormGroup>
-          <ControlLabel>Wybierz datę: </ControlLabel>
-          <DatePicker
-            id="example-datepicker"
-            dateFormat="YYYY/MM/DD"
-            weekStartsOnMonday
-            dayLabels={plDayLabels}
-            monthLabels={plMonthLabels}
-            onChange={this.handleChange.bind(this)}
-            value={this.props.rates.tableDate}
-          />
-        </FormGroup>
-        {notificationBtn}
+        <HomeOptions 
+          isAuthenticated={isAuthenticated}
+          tableDate={this.props.rates.tableDate}
+          handleChange={this.handleChange.bind(this)}
+        />
       </Col>
       <Col xs={9} md={9}>
         <h3>Kursy walut ({this.props.rates.tableDate})</h3>
