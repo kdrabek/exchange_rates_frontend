@@ -9,6 +9,7 @@ import Chart from '../Chart/Chart';
 import * as ratesActions from '../../actions/actions';
 import { currencyCodePictures } from '../../utils/currencyCodes';
 import './Details.css';
+import RatesTable from '../RatesTable/RatesTable';
 
 class Details extends Component {
   
@@ -30,27 +31,22 @@ class Details extends Component {
     );
   }
 
-  prepareTable() {
+  prepareTableData(){
     const increaseArrow = <span className="green">&#8599;</span>;
     const decreaseArrow = <span className="red">&#8600;</span>;
-    let ratesTable = null;
 
-    if (this.props.ratesDetails) {
-      return this.props.ratesDetails.map((rate, index) => {
-        return (
-          <tr key={index}>
-            <td>{index + 1}</td>
-            <td>{rate.date}</td>
-            <td>{rate.rate}</td>
-            <td>{rate.relative_change}&nbsp;
-              {parseFloat(rate.relative_change) > 0 ? increaseArrow : decreaseArrow}
-            </td>
-          </tr>
-        );
-      });
-
+    if (!this.props.ratesDetails) {
+      return [['Downloading...']];
     } else {
-      return ratesTable = <tr><td>Sciagam</td></tr>;
+      return this.props.ratesDetails.map((rate, index) => {
+        return [
+          index + 1,
+          rate.date,
+          rate.rate,
+          rate.relative_change,
+          parseFloat(rate.relative_change) > 0 ? increaseArrow : decreaseArrow,
+        ];
+      });
     }
   }
 
@@ -96,19 +92,10 @@ class Details extends Component {
              </h4>
           <Chart data={this.prepareChartData().reverse()}/>
           <hr />
-          <Table striped hover>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Data</th>
-                <th>Kurs</th>
-                <th>Zmiana</th>
-              </tr>
-            </thead>
-            <tbody>
-            {this.prepareTable()}
-            </tbody>
-          </Table>
+          <RatesTable 
+            headers={['#', 'Data', 'Kurs', 'Zmiana', ' ']} 
+            data={this.prepareTableData()}
+          />
         </Col>
       </Row> 
     );

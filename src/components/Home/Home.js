@@ -8,6 +8,7 @@ import moment from 'moment';
 import * as ratesActions from '../../actions/actions';
 import { currencyCodePictures } from '../../utils/currencyCodes';
 import { plDayLabels, plMonthLabels } from '../../utils/plLocale';
+import RatesTable from '../RatesTable/RatesTable';
 
 class Home extends Component {
 
@@ -28,29 +29,25 @@ class Home extends Component {
     );
   }
 
-  render() {
-    let ratesTable = null;
+  prepareTableData(){
     if (!this.props.rates.rates) {
-      ratesTable = <tr><td>Sciagam...</td></tr>;
+      return [['Downloading...']];
     } else {
-      ratesTable = this.props.rates.rates.map((rate, index) => {
+      return this.props.rates.rates.map((rate, index) => {
         const linkTo = `/details/${rate.currency}`;
-        return (
-          <tr key={index}>
-            <td>
-              <img src={currencyCodePictures[rate.currency]} alt={rate.currency}/>
-                {rate.country}
-            </td>
-            <td>{rate.name}</td>
-            <td>{rate.currency}</td>
-            <td>{rate.rate}</td>
-            <td>
-              <Link to={linkTo}>Zobacz więcej...</Link>
-            </td>
-          </tr>
-        );
+        return [
+          <img src={currencyCodePictures[rate.currency]} alt={rate.currency}/>,
+          rate.country,
+          rate.name,
+          rate.currency,
+          rate.rate,
+          <Link to={linkTo}>Zobacz więcej...</Link>
+        ];
       });
     }
+  }
+
+  render() {
     const isAuthenticated = (
       localStorage.getItem('AuthUserToken') !== null &&
       localStorage.getItem('AuthUserEmail') !== null
@@ -78,20 +75,11 @@ class Home extends Component {
       <Col xs={9} md={9}>
         <h3>Kursy walut ({this.props.rates.tableDate})</h3>
         <hr />
-        <Table striped hover className="force-text-left">
-        <thead>
-          <tr>
-            <th>Kraj</th>
-            <th>Waluta</th>
-            <th>Symbol</th>
-            <th>Kurs</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        {ratesTable}
-        </tbody>
-      </Table>
+        <RatesTable 
+          headers={[' ', 'Kraj', 'Waluta', 'Symbol', 'Kurs', ' ']} 
+          data={this.prepareTableData()}
+        />
+
       </Col>
     </Row>
     );
