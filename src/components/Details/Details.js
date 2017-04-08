@@ -10,6 +10,7 @@ import * as ratesActions from '../../actions/actions';
 import { currencyCodePictures } from '../../utils/currencyCodes';
 import './Details.css';
 import RatesTable from '../RatesTable/RatesTable';
+import DetailsOptions from '../DetailsOptions/DetailsOptions';
 
 class Details extends Component {
   
@@ -63,25 +64,7 @@ class Details extends Component {
     return (
       <Row>
         <Col xs={3} md={3}>
-          <h4 className="subheader">Opcje</h4>
-          <hr/>
-          <FormGroup>
-            <ControlLabel htmlFor="days-input">
-              Ilość dni do uwzględnienia:
-            </ControlLabel>
-            <FormControl
-              id="days-input"
-              type="number"
-              name="days"
-              min="3"
-              max="30"
-              placeholder="5"
-              onChange={this.handleChange.bind(this)}
-            />
-          </FormGroup>
-          <Link to="/notifications">
-            <Button bsStyle="primary" block>Przejdź do notyfikacji</Button>
-          </Link>
+          <DetailsOptions handleChange={this.handleChange.bind(this)}/>
         </Col>
         <Col xs={9} md={9}>
           <h4>Widok szczegółowy</h4>
