@@ -4,6 +4,7 @@ import Switch from 'react-bootstrap-switch';
 import { connect } from 'react-redux';
 
 import * as ratesActions from '../../actions/actions';
+import * as currenciesActions from '../../actions/currenciesActions';
 
 const thresholdConditionMap = {
   'ABOVE': 'powyżej', 'BELOW': 'poniżej'
@@ -14,7 +15,7 @@ class Notifications extends Component {
   componentDidMount() {
     const authToken = localStorage.getItem('AuthUserToken');
     this.props.dispatch(ratesActions.loadNotifications(authToken));
-    this.props.dispatch(ratesActions.loadCurrencies(authToken));
+    this.props.dispatch(currenciesActions.loadCurrencies(authToken));
   }
   
   deleteNotification(notificationId) {
