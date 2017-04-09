@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Row, Col, Table, FormControl, Button, FormGroup, ControlLabel, Form } from 'react-bootstrap';
-import Switch from 'react-bootstrap-switch';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Switch from 'react-bootstrap-switch';
+import { Row, Col, Table, FormControl, Button } from 'react-bootstrap';
 
+
+import NotificationsForm from '../NotificationsForm/NotificationsForm';
 import * as notificationsActions from '../../actions/notificationsActions';
 import * as currenciesActions from '../../actions/currenciesActions';
 
@@ -11,22 +14,27 @@ const thresholdConditionMap = {
 };
 
 class Notifications extends Component {
+
+  constructor(props) {
+    super(props);
+    this.submitForm = this.submitForm.bind(this);
+  }
   
   componentDidMount() {
     const authToken = localStorage.getItem('AuthUserToken');
-    this.props.dispatch(notificationsActions.loadNotifications(authToken));
-    this.props.dispatch(currenciesActions.loadCurrencies(authToken));
+    this.props.loadNotifications(authToken);
+    this.props.loadCurrencies(authToken);
   }
   
   deleteNotification(notificationId) {
     const authToken = localStorage.getItem('AuthUserToken');
-    this.props.dispatch(notificationsActions.deleteNotification(authToken, notificationId));    
+    this.props.deleteNotification(authToken, notificationId);    
   }
 
   changeNotificationState(notification){
     const authToken = localStorage.getItem('AuthUserToken');
     notification.is_active = !notification.is_active;
-    this.props.dispatch(notificationsActions.updateNotification(authToken, notification));
+    this.props.updateNotification(authToken, notification);
   }
 
   displayNotifications(){
@@ -75,47 +83,11 @@ class Notifications extends Component {
       threshold: e.target.threshold.value,
       is_active: true
     };
-    this.props.dispatch(notificationsActions.addNotification(authToken, newNotification));
-  }
-
-  displayAddNotificationForm() {
-    const currencySelect = this.props.currencies.length ? this.props.currencies.map(currency => {
-      return <option
-        value={currency.code}>{currency.code} ({currency.country})</option>
-      }
-    ) : <option></option>;
-    return (
-      <Form onSubmit={this.submitForm.bind(this)}>
-        <FormGroup>
-          <ControlLabel>Waluta</ControlLabel>
-          <FormControl componentClass="select" placeholder="select" name="currency">
-            {currencySelect}
-          </FormControl>
-        </FormGroup>
-
-        <FormGroup>
-          <ControlLabel>Próg</ControlLabel>
-          <FormControl type="number" step="0.01" min="0" placeholder="0.00" name="rate" required/>
-        </FormGroup>
-
-        <FormGroup>
-          <ControlLabel>Warunek</ControlLabel>
-          <FormControl componentClass="select" placeholder="select" name="threshold">
-            <option value="ABOVE" selected>powyżej</option>
-            <option value="BELOW">poniżej</option>
-          </FormControl>
-        </FormGroup>
-
-        <FormGroup>
-          <Button type="submit" bsStyle="success" >Dodaj</Button>
-        </FormGroup>
-      </Form>
-    )
+    this.props.addNotification(authToken, newNotification);
   }
   
   render() {
     const notificationsTable = this.props.notifications ? this.displayNotifications() : 'Sciagam...';
-    const notificationsForm = this.displayAddNotificationForm();
     return (
       <div>
         <Row>
@@ -148,7 +120,7 @@ class Notifications extends Component {
         <Row>
           <Col md={4} mdOffset={3}>
             <h4>Dodaj nową notyfikację</h4>
-            {notificationsForm}
+            <NotificationsForm currencies={this.props.currencies} submitForm={this.submitForm} />
           </Col>
         </Row>
       </div>  
@@ -157,11 +129,31 @@ class Notifications extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+Notifications.propTypes = {
+  notifications: PropTypes.array,
+  currencies: PropTypes.array,
+  loadNotifications: PropTypes.func,
+  addNotification: PropTypes.func,
+  updateNotification: PropTypes.func,
+  deleteNotification: PropTypes.func,
+  loadCurrencies: PropTypes.func,
+}
+
+const mapStateToProps = (state, ownProps) => {
   return {
     notifications: state.notifications,
     currencies: state.currencies
-  };
+  }
 }
 
-export default connect(mapStateToProps)(Notifications);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadNotifications: (token) => dispatch(notificationsActions.loadNotifications(token)),
+    addNotification: (token, notification) => dispatch(notificationsActions.addNotification(token, notification)),
+    updateNotification: (token, notification) => dispatch(notificationsActions.updateNotification(token, notification)),
+    deleteNotification: (token, id) => dispatch(notificationsActions.deleteNotification(token, id)),
+    loadCurrencies: (token) => dispatch(currenciesActions.loadCurrencies(token))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications);

@@ -1,23 +1,29 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Row, Col } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import moment from 'moment';
 
-import * as ratesActions from '../../actions/ratesActions';
-import { currencyCodePictures } from '../../utils/currencyCodes';
 import RatesTable from '../RatesTable/RatesTable';
 import HomeOptions from '../HomeOptions/HomeOptions';
+import * as ratesActions from '../../actions/ratesActions';
+import { currencyCodePictures } from '../../utils/currencyCodes';
 
 class Home extends Component {
 
+  constructor(props){
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
   componentDidMount() {
-    this.props.dispatch(ratesActions.loadRates());
+    this.props.loadRates();
   }
 
   handleChange(date) {
     const formattedDate = moment(date).format('YYYY-MM-DD');
-    this.props.dispatch(ratesActions.loadRatesForDate(formattedDate));
+    this.props.loadRatesForDate(formattedDate);
   }
 
   prepareTableData(){
@@ -49,7 +55,7 @@ class Home extends Component {
         <HomeOptions 
           isAuthenticated={isAuthenticated}
           tableDate={this.props.rates.tableDate}
-          handleChange={this.handleChange.bind(this)}
+          handleChange={this.handleChange}
         />
       </Col>
       <Col xs={9} md={9}>
@@ -66,12 +72,27 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+Home.propTypes = {
+  rates: PropTypes.object,
+  tableDate: PropTypes.string,
+  user: PropTypes.object,
+  loadRates: PropTypes.func,
+  loadRatesForDate: PropTypes.func
+}
+
+const mapStateToProps = (state, ownProps) => {
   return {
     rates: state.rates,
     tableDate: state.tableDate,
     user: state.user
-  };
+  }
 }
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadRates: () => dispatch(ratesActions.loadRates()),
+    loadRatesForDate: (date) => dispatch(ratesActions.loadRatesForDate(date))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

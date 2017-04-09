@@ -1,0 +1,87 @@
+exports[`Tagline component matches the snapshot 1`] = `
+<div>
+  <form
+    className=""
+    onSubmit={[Function]}>
+    <div
+      className="form-group">
+      <label
+        className="control-label"
+        htmlFor={undefined}>
+        Waluta
+      </label>
+      <select
+        className="form-control"
+        id={undefined}
+        name="currency"
+        placeholder="select"
+        type={undefined}>
+        <option
+          value="ABC">
+          ABC
+           (
+          country
+          )
+        </option>
+        <option
+          value="CDE">
+          CDE
+           (
+          totally different country
+          )
+        </option>
+      </select>
+    </div>
+    <div
+      className="form-group">
+      <label
+        className="control-label"
+        htmlFor={undefined}>
+        Próg
+      </label>
+      <input
+        className="form-control"
+        id={undefined}
+        min="0"
+        name="rate"
+        placeholder="0.00"
+        required={true}
+        step="0.01"
+        type="number" />
+    </div>
+    <div
+      className="form-group">
+      <label
+        className="control-label"
+        htmlFor={undefined}>
+        Warunek
+      </label>
+      <select
+        className="form-control"
+        id={undefined}
+        name="threshold"
+        placeholder="select"
+        type={undefined}>
+        <option
+          selected={true}
+          value="ABOVE">
+          powyżej
+        </option>
+        <option
+          value="BELOW">
+          poniżej
+        </option>
+      </select>
+    </div>
+    <div
+      className="form-group">
+      <button
+        className="btn btn-success"
+        disabled={false}
+        type="submit">
+        Dodaj
+      </button>
+    </div>
+  </form>
+</div>
+`;

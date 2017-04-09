@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 
 import Chart from '../Chart/Chart';
+import RatesTable from '../RatesTable/RatesTable';
+import DetailsOptions from '../DetailsOptions/DetailsOptions';
 import * as ratesActions from '../../actions/ratesActions';
 import { currencyCodePictures } from '../../utils/currencyCodes';
 import './Details.css';
-import RatesTable from '../RatesTable/RatesTable';
-import DetailsOptions from '../DetailsOptions/DetailsOptions';
 
 class Details extends Component {
+
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
   
   componentDidMount(){
     const currencyCode = this.props.routeParams.currencyCode;
     const authToken = localStorage.getItem('AuthUserToken');
-    this.props.dispatch(
-      ratesActions.loadRatesForCurrency(authToken, currencyCode, 5)
-    );
+    this.props.loadRatesForCurrency(authToken, currencyCode, 5);
   }
 
   handleChange(e){
     const currencyCode = this.props.routeParams.currencyCode;
     const authToken = localStorage.getItem('AuthUserToken');
-    this.props.dispatch(
-      ratesActions.loadRatesForCurrency(
-        authToken, currencyCode, parseInt(e.target.value, 10)
-      )
-    );
+    this.props.loadRatesForCurrency(authToken, currencyCode, parseInt(e.target.value, 10));
   }
 
   prepareTableData(){
@@ -61,7 +61,7 @@ class Details extends Component {
     return (
       <Row>
         <Col xs={3} md={3}>
-          <DetailsOptions handleChange={this.handleChange.bind(this)}/>
+          <DetailsOptions handleChange={this.handleChange}/>
         </Col>
         <Col xs={9} md={9}>
           <h4>Widok szczegółowy</h4>
@@ -82,10 +82,25 @@ class Details extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    ratesDetails: state.ratesDetails.rates
-  };
+Details.propTypes = {
+  ratesDetails: PropTypes.array,
+  loadRatesForCurrency: PropTypes.func
 }
 
-export default connect(mapStateToProps)(Details);
+const mapStateToProps = (state, ownProps) => {
+  return {
+    ratesDetails: state.ratesDetails.rates
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadRatesForCurrency: (token, currency, limit) => {
+      return dispatch(
+        ratesActions.loadRatesForCurrency(token, currency, limit)
+      );
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Details);
