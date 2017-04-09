@@ -22,9 +22,14 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 
 
 class Login extends Component {
+
+  constructor(props) {
+    super(props);
+    this.submitForm = this.submitForm.bind(this);
+  }
   
   submitForm(user){
-    this.props.dispatch(userActions.loginUser(user));
+    this.props.loginUser(user);
   }
 
   render() {
@@ -33,7 +38,7 @@ class Login extends Component {
         <Col md={6} mdOffset={3}>
           <h4>Logowanie</h4>
 
-            <Form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
+            <Form onSubmit={this.props.handleSubmit(this.submitForm)}>
               <Field
                 name="email"
                 type="email"
@@ -75,13 +80,19 @@ class Login extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
   return {
     apiError: state.user.apiError,
     user: state.user
-  };
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUser: (user) => dispatch(userActions.loginUser(user))
+  }
 }
 
 export default reduxForm({form: 'loginForm'})(
-  connect(mapStateToProps)(Login)
+  connect(mapStateToProps, mapDispatchToProps)(Login)
 );

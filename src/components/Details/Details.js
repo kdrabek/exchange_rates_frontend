@@ -10,23 +10,22 @@ import RatesTable from '../RatesTable/RatesTable';
 import DetailsOptions from '../DetailsOptions/DetailsOptions';
 
 class Details extends Component {
+
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
   
   componentDidMount(){
     const currencyCode = this.props.routeParams.currencyCode;
     const authToken = localStorage.getItem('AuthUserToken');
-    this.props.dispatch(
-      ratesActions.loadRatesForCurrency(authToken, currencyCode, 5)
-    );
+    this.props.loadRatesForCurrency(authToken, currencyCode, 5);
   }
 
   handleChange(e){
     const currencyCode = this.props.routeParams.currencyCode;
     const authToken = localStorage.getItem('AuthUserToken');
-    this.props.dispatch(
-      ratesActions.loadRatesForCurrency(
-        authToken, currencyCode, parseInt(e.target.value, 10)
-      )
-    );
+    this.props.loadRatesForCurrency(authToken, currencyCode, parseInt(e.target.value, 10));
   }
 
   prepareTableData(){
@@ -61,7 +60,7 @@ class Details extends Component {
     return (
       <Row>
         <Col xs={3} md={3}>
-          <DetailsOptions handleChange={this.handleChange.bind(this)}/>
+          <DetailsOptions handleChange={this.handleChange}/>
         </Col>
         <Col xs={9} md={9}>
           <h4>Widok szczegółowy</h4>
@@ -82,10 +81,20 @@ class Details extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
   return {
     ratesDetails: state.ratesDetails.rates
-  };
+  }
 }
 
-export default connect(mapStateToProps)(Details);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadRatesForCurrency: (token, currency, limit) => {
+      return dispatch(
+        ratesActions.loadRatesForCurrency(token, currency, limit)
+      );
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Details);

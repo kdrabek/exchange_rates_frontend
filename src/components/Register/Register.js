@@ -20,11 +20,16 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 
 class Register extends Component {
 
+  constructor(props) {
+    super(props);
+    this.submitForm = this.submitForm.bind(this);
+  }
+
   submitForm(user){
     if (user.password !== user.password2) {
       throw new SubmissionError({_error: 'Podane hasła nie są takie same.'});
     }
-    this.props.dispatch(userActions.registerUser(user));
+    this.props.registerUser(user);
   }
 
   render() {
@@ -33,7 +38,7 @@ class Register extends Component {
         <Col md={6} mdOffset={3}>
           <h4>Rejestracja</h4>
 
-            <Form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
+            <Form onSubmit={this.props.handleSubmit(this.submitForm)}>
               <Field
                 name="email"
                 type="email"
@@ -82,14 +87,21 @@ class Register extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
   return {
     apiError: state.user.apiError,
     user: state.user
-  };
+  }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    registerUser: (user) => dispatch(userActions.registerUser(user))
+  }
+}
+
+
 export default reduxForm({form: 'registerForm'})(
-  connect(mapStateToProps)(Register)
+  connect(mapStateToProps, mapDispatchToProps)(Register)
 );
 

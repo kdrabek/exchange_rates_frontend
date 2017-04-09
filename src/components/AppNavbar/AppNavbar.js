@@ -1,13 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Button, Navbar, Nav, NavItem, Row, Col } from 'react-bootstrap';
-import { connect } from 'react-redux';
+
 import * as userActions from '../../actions/userActions';
 
 export class AppNavbar extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
   handleLogout(){
-    this.props.dispatch(userActions.logoutUser())
+    this.props.logoutUser();
   }
 
   unauthenticatedMenu(){
@@ -34,7 +40,7 @@ export class AppNavbar extends React.Component {
           Witaj, <strong>{localStorage.getItem('AuthUserEmail')}</strong>
         </NavItem>
         <NavItem>
-          <Button bsStyle="danger" onClick={this.handleLogout.bind(this)}>Wyloguj się</Button>
+          <Button bsStyle="danger" onClick={this.handleLogout}>Wyloguj się</Button>
         </NavItem>
       </Nav>
       );
@@ -66,11 +72,17 @@ export class AppNavbar extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
   return {
     apiError: state.user.apiError,
     user: state.user.user
-  };
+  }
 }
 
-export default connect(mapStateToProps)(AppNavbar);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutUser: () => dispatch(userActions.logoutUser())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppNavbar);
