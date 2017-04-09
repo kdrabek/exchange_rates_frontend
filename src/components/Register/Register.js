@@ -5,7 +5,7 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
 
 import './Register.css';
-import * as ratesActions from  '../../actions/actions';
+import * as userActions from  '../../actions/userActions';
 import { plRegisterErrors } from '../../utils/plLocale';
 
 const required = value => value ? undefined : 'To pole jest wymagane';
@@ -24,7 +24,7 @@ class Register extends Component {
     if (user.password !== user.password2) {
       throw new SubmissionError({_error: 'Podane hasła nie są takie same.'});
     }
-    this.props.dispatch(ratesActions.registerUser(user));
+    this.props.dispatch(userActions.registerUser(user));
   }
 
   render() {

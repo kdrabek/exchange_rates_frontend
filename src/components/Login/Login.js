@@ -8,7 +8,7 @@ import {
 } from 'react-bootstrap';
 
 import './Login.css';
-import * as ratesActions from '../../actions/actions';
+import * as userActions from '../../actions/userActions';
 import { plLoginErrors } from '../../utils/plLocale';
 
 const required = value => value ? undefined : 'To pole jest wymagane';
@@ -24,7 +24,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 class Login extends Component {
   
   submitForm(user){
-    this.props.dispatch(ratesActions.loginUser(user));
+    this.props.dispatch(userActions.loginUser(user));
   }
 
   render() {
