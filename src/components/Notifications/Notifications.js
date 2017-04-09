@@ -3,7 +3,8 @@ import { Row, Col, Table, FormControl, Button, FormGroup, ControlLabel, Form } f
 import Switch from 'react-bootstrap-switch';
 import { connect } from 'react-redux';
 
-import * as ratesActions from '../../actions/actions';
+import * as notificationsActions from '../../actions/notificationsActions';
+import * as currenciesActions from '../../actions/currenciesActions';
 
 const thresholdConditionMap = {
   'ABOVE': 'powyżej', 'BELOW': 'poniżej'
@@ -13,19 +14,19 @@ class Notifications extends Component {
   
   componentDidMount() {
     const authToken = localStorage.getItem('AuthUserToken');
-    this.props.dispatch(ratesActions.loadNotifications(authToken));
-    this.props.dispatch(ratesActions.loadCurrencies(authToken));
+    this.props.dispatch(notificationsActions.loadNotifications(authToken));
+    this.props.dispatch(currenciesActions.loadCurrencies(authToken));
   }
   
   deleteNotification(notificationId) {
     const authToken = localStorage.getItem('AuthUserToken');
-    this.props.dispatch(ratesActions.deleteNotification(authToken, notificationId));    
+    this.props.dispatch(notificationsActions.deleteNotification(authToken, notificationId));    
   }
 
   changeNotificationState(notification){
     const authToken = localStorage.getItem('AuthUserToken');
     notification.is_active = !notification.is_active;
-    this.props.dispatch(ratesActions.updateNotification(authToken, notification));
+    this.props.dispatch(notificationsActions.updateNotification(authToken, notification));
   }
 
   displayNotifications(){
@@ -74,7 +75,7 @@ class Notifications extends Component {
       threshold: e.target.threshold.value,
       is_active: true
     };
-    this.props.dispatch(ratesActions.addNotification(authToken, newNotification));
+    this.props.dispatch(notificationsActions.addNotification(authToken, newNotification));
   }
 
   displayAddNotificationForm() {

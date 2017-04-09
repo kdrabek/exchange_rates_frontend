@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Button, Navbar, Nav, NavItem, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import * as ratesActions from '../../actions/actions';
+import * as userActions from '../../actions/userActions';
 
 export class AppNavbar extends React.Component {
 
   handleLogout(){
-    this.props.dispatch(ratesActions.logoutUser())
+    this.props.dispatch(userActions.logoutUser())
   }
 
   unauthenticatedMenu(){
