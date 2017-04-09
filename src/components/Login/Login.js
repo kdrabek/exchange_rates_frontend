@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
@@ -77,6 +78,12 @@ class Login extends Component {
       </Row>
     );
   }
+}
+
+Login.propTypes = {
+  apiError: PropTypes.string,
+  user: PropTypes.object,
+  loginUser: PropTypes.func
 }
 
 const mapStateToProps = (state, ownProps) => {

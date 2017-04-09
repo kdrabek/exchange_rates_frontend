@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Switch from 'react-bootstrap-switch';
 import { 
@@ -163,6 +164,16 @@ class Notifications extends Component {
     );
     
   }
+}
+
+Notifications.propTypes = {
+  notifications: PropTypes.array,
+  currencies: PropTypes.array,
+  loadNotifications: PropTypes.func,
+  addNotification: PropTypes.func,
+  updateNotification: PropTypes.func,
+  deleteNotification: PropTypes.func,
+  loadCurrencies: PropTypes.func,
 }
 
 const mapStateToProps = (state, ownProps) => {

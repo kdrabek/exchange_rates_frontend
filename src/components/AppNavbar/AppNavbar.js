@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Button, Navbar, Nav, NavItem, Row, Col } from 'react-bootstrap';
@@ -72,9 +73,13 @@ export class AppNavbar extends React.Component {
   }
 }
 
+AppNavbar.propTypes = {
+  logoutUser: PropTypes.func,
+  user: PropTypes.object
+}
+
 const mapStateToProps = (state, ownProps) => {
   return {
-    apiError: state.user.apiError,
     user: state.user.user
   }
 }

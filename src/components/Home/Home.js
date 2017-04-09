@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Row, Col } from 'react-bootstrap';
@@ -69,6 +70,14 @@ class Home extends Component {
     </Row>
     );
   }
+}
+
+Home.propTypes = {
+  rates: PropTypes.object,
+  tableDate: PropTypes.string,
+  user: PropTypes.object,
+  loadRates: PropTypes.func,
+  loadRatesForDate: PropTypes.func
 }
 
 const mapStateToProps = (state, ownProps) => {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 
@@ -79,6 +80,11 @@ class Details extends Component {
       </Row> 
     );
   }
+}
+
+Details.propTypes = {
+  ratesDetails: PropTypes.array,
+  loadRatesForCurrency: PropTypes.func
 }
 
 const mapStateToProps = (state, ownProps) => {

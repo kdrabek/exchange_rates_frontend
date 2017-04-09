@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
@@ -87,6 +88,12 @@ class Register extends Component {
       </Row>
     );
   }
+}
+
+Register.propTypes = {
+  apiError: PropTypes.string,
+  user: PropTypes.object,
+  registerUser: PropTypes.func
 }
 
 const mapStateToProps = (state, ownProps) => {

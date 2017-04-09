@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Grid } from 'react-bootstrap';
 
 import AppNavbar from '../AppNavbar/AppNavbar';
@@ -16,6 +17,10 @@ class App extends Component {
       </div>
     );
   }
+}
+
+App.propTypes = {
+  children: PropTypes.object
 }
 
 export default App;
