@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Switch from 'react-bootstrap-switch';
-import { 
-  Row, Col, Table, FormControl, Button, FormGroup, ControlLabel, Form 
-} from 'react-bootstrap';
+import { Row, Col, Table, FormControl, Button } from 'react-bootstrap';
 
 
+import NotificationsForm from '../NotificationsForm/NotificationsForm';
 import * as notificationsActions from '../../actions/notificationsActions';
 import * as currenciesActions from '../../actions/currenciesActions';
 
@@ -86,45 +85,9 @@ class Notifications extends Component {
     };
     this.props.addNotification(authToken, newNotification);
   }
-
-  displayAddNotificationForm() {
-    const currencySelect = this.props.currencies.length ? this.props.currencies.map(currency => {
-      return <option
-        value={currency.code}>{currency.code} ({currency.country})</option>
-      }
-    ) : <option></option>;
-    return (
-      <Form onSubmit={this.submitForm}>
-        <FormGroup>
-          <ControlLabel>Waluta</ControlLabel>
-          <FormControl componentClass="select" placeholder="select" name="currency">
-            {currencySelect}
-          </FormControl>
-        </FormGroup>
-
-        <FormGroup>
-          <ControlLabel>Próg</ControlLabel>
-          <FormControl type="number" step="0.01" min="0" placeholder="0.00" name="rate" required/>
-        </FormGroup>
-
-        <FormGroup>
-          <ControlLabel>Warunek</ControlLabel>
-          <FormControl componentClass="select" placeholder="select" name="threshold">
-            <option value="ABOVE" selected>powyżej</option>
-            <option value="BELOW">poniżej</option>
-          </FormControl>
-        </FormGroup>
-
-        <FormGroup>
-          <Button type="submit" bsStyle="success" >Dodaj</Button>
-        </FormGroup>
-      </Form>
-    )
-  }
   
   render() {
     const notificationsTable = this.props.notifications ? this.displayNotifications() : 'Sciagam...';
-    const notificationsForm = this.displayAddNotificationForm();
     return (
       <div>
         <Row>
@@ -157,7 +120,7 @@ class Notifications extends Component {
         <Row>
           <Col md={4} mdOffset={3}>
             <h4>Dodaj nową notyfikację</h4>
-            {notificationsForm}
+            <NotificationsForm currencies={this.props.currencies} submitForm={this.submitForm} />
           </Col>
         </Row>
       </div>  
