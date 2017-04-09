@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-
 import { 
   Row, Col, FormControl, Button, ControlLabel, FormGroup, Form 
 } from 'react-bootstrap';
 
-import './Login.css';
 import * as userActions from '../../actions/userActions';
 import { plLoginErrors } from '../../utils/plLocale';
+import './Login.css';
 
 const required = value => value ? undefined : 'To pole jest wymagane';
 const renderField = ({ input, label, type, meta: { touched, error } }) => (

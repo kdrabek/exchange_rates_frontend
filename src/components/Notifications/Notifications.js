@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Row, Col, Table, FormControl, Button, FormGroup, ControlLabel, Form } from 'react-bootstrap';
-import Switch from 'react-bootstrap-switch';
 import { connect } from 'react-redux';
+import Switch from 'react-bootstrap-switch';
+import { 
+  Row, Col, Table, FormControl, Button, FormGroup, ControlLabel, Form 
+} from 'react-bootstrap';
+
 
 import * as notificationsActions from '../../actions/notificationsActions';
 import * as currenciesActions from '../../actions/currenciesActions';

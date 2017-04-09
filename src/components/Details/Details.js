@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 
 import Chart from '../Chart/Chart';
+import RatesTable from '../RatesTable/RatesTable';
+import DetailsOptions from '../DetailsOptions/DetailsOptions';
 import * as ratesActions from '../../actions/ratesActions';
 import { currencyCodePictures } from '../../utils/currencyCodes';
 import './Details.css';
-import RatesTable from '../RatesTable/RatesTable';
-import DetailsOptions from '../DetailsOptions/DetailsOptions';
 
 class Details extends Component {
 
