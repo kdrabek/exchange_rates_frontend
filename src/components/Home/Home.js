@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import * as ratesActions from '../../actions/actions';
+import * as ratesActions from '../../actions/ratesActions';
 import { currencyCodePictures } from '../../utils/currencyCodes';
 import RatesTable from '../RatesTable/RatesTable';
 import HomeOptions from '../HomeOptions/HomeOptions';

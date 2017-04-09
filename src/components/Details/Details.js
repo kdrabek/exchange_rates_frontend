@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 
 import Chart from '../Chart/Chart';
-import * as ratesActions from '../../actions/actions';
+import * as ratesActions from '../../actions/ratesActions';
 import { currencyCodePictures } from '../../utils/currencyCodes';
 import './Details.css';
 import RatesTable from '../RatesTable/RatesTable';
