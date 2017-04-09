@@ -8,14 +8,14 @@ import { BASE_API_URL } from '../../utils/api';
 
 const mockStore = configureMockStore([ thunk ]);
 
-describe('Rates Actions', () => {
+describe('Currencies Actions', () => {
   
   afterEach(() => {
     nock.cleanAll()
   });
 
   it('dispatches CURRENCIES_LOADED when fetching currencies is complete', () => {
-    const store = mockStore({ rates: [] })
+    const store = mockStore({ currencies: [] })
     const apiResponse = {
       currencies: [{
         code: "ABC",
