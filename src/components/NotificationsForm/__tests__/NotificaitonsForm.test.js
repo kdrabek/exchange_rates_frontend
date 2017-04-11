@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import NotificationsForm from '../NotificationsForm';
 import renderer from 'react-test-renderer';
 
-describe('Tagline component', () => {
+describe('NotificationsForm component', () => {
 
   it('matches the snapshot', () => {
     const currencies = [

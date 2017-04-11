@@ -11,7 +11,7 @@ import * as notificationsActions from '../../actions/notificationsActions';
 import * as currenciesActions from '../../actions/currenciesActions';
 import { plThresholdConditionMap } from '../../utils/plLocale';
 
-class Notifications extends Component {
+export class Notifications extends Component {
 
   constructor(props) {
     super(props);

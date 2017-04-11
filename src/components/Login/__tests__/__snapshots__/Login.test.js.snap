@@ -1,0 +1,73 @@
+exports[`Login component matches the snapshot 1`] = `
+<div
+  className="row">
+  <div
+    className="col-md-6 col-md-offset-3">
+    <h4>
+      Logowanie
+    </h4>
+    <form
+      className=""
+      onSubmit={[Function]}>
+      <div
+        className="form-group">
+        <label
+          className="control-label"
+          htmlFor={undefined}>
+          Email
+        </label>
+        <input
+          className="form-control"
+          id={undefined}
+          name="email"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+          placeholder="Email"
+          type="email"
+          value="" />
+      </div>
+      <div
+        className="form-group">
+        <label
+          className="control-label"
+          htmlFor={undefined}>
+          Hasło
+        </label>
+        <input
+          className="form-control"
+          id={undefined}
+          name="password"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+          placeholder="Hasło"
+          type="password"
+          value="" />
+      </div>
+      <button
+        className="btn btn-primary btn-block"
+        disabled={false}
+        type="submit">
+        Zaloguj się
+      </button>
+      <button
+        className="btn btn-warning btn-block"
+        disabled={true}
+        onClick={[Function]}
+        type="button">
+        Reset
+      </button>
+    </form>
+    <a
+      onClick={[Function]}
+      style={Object {}}>
+      Nie masz konta? Zarejestruj się.
+    </a>
+  </div>
+</div>
+`;

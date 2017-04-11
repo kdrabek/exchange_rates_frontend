@@ -1,4 +1,4 @@
-exports[`Tagline component matches the snapshot 1`] = `
+exports[`NotificationsForm component matches the snapshot 1`] = `
 <div>
   <form
     className=""
