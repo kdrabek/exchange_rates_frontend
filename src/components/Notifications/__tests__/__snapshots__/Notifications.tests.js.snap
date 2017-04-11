@@ -1,0 +1,144 @@
+exports[`Notifications component matches the snapshot 1`] = `
+<div>
+  <div
+    className="row">
+    <div
+      className="col-md-3">
+      <h4>
+        Jak to działa?
+      </h4>
+      <hr />
+      <ul>
+        <li>
+          <p>
+            Notyfikacja zostanie wysłana tylko wtedy, jeśli wybrany warunek jest spełniony (kurs powyżej lub poniżej progu).
+          </p>
+        </li>
+        <li>
+          <p>
+            Tylko 
+            <em>
+              aktywne
+            </em>
+             notyfikacje będą wysyłane.
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div
+      className="col-md-9">
+      <h4>
+        Moje notyfikacje
+      </h4>
+      <hr />
+      <table
+        className="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>
+              Waluta
+            </th>
+            <th>
+              Próg
+            </th>
+            <th>
+              Warunek
+            </th>
+            <th>
+              Aktywna
+            </th>
+          </tr>
+        </thead>
+        <tbody />
+      </table>
+    </div>
+  </div>
+  <div
+    className="row">
+    <div
+      className="col-md-4 col-md-offset-3">
+      <h4>
+        Dodaj nową notyfikację
+      </h4>
+      <div>
+        <form
+          className=""
+          onSubmit={[Function]}>
+          <div
+            className="form-group">
+            <label
+              className="control-label"
+              htmlFor={undefined}>
+              Waluta
+            </label>
+            <select
+              className="form-control"
+              id={undefined}
+              name="currency"
+              placeholder="select"
+              type={undefined}>
+              <option
+                value="ABC">
+                ABC
+                 (
+                country
+                )
+              </option>
+            </select>
+          </div>
+          <div
+            className="form-group">
+            <label
+              className="control-label"
+              htmlFor={undefined}>
+              Próg
+            </label>
+            <input
+              className="form-control"
+              id={undefined}
+              min="0"
+              name="rate"
+              placeholder="0.00"
+              required={true}
+              step="0.01"
+              type="number" />
+          </div>
+          <div
+            className="form-group">
+            <label
+              className="control-label"
+              htmlFor={undefined}>
+              Warunek
+            </label>
+            <select
+              className="form-control"
+              id={undefined}
+              name="threshold"
+              placeholder="select"
+              type={undefined}>
+              <option
+                selected={true}
+                value="ABOVE">
+                powyżej
+              </option>
+              <option
+                value="BELOW">
+                poniżej
+              </option>
+            </select>
+          </div>
+          <div
+            className="form-group">
+            <button
+              className="btn btn-success"
+              disabled={false}
+              type="submit">
+              Dodaj
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;

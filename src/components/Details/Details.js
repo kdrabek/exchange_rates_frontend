@@ -10,7 +10,7 @@ import * as ratesActions from '../../actions/ratesActions';
 import { currencyCodePictures } from '../../utils/currencyCodes';
 import './Details.css';
 
-class Details extends Component {
+export class Details extends Component {
 
   constructor(props) {
     super(props);

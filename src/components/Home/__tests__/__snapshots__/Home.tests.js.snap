@@ -1,0 +1,144 @@
+exports[`Home component matches the snapshot 1`] = `
+<div
+  className="row">
+  <div
+    className="col-md-3 col-xs-3">
+    <div>
+      <h3>
+        Opcje
+      </h3>
+      <hr />
+      <div
+        className="form-group">
+        <label
+          className="control-label"
+          htmlFor={undefined}>
+          Wybierz datę:
+        </label>
+        <span
+          className="input-group"
+          id="example-datepicker_group">
+          <div
+            style={
+              Object {
+                "position": "relative",
+              }
+            } />
+          <input
+            data-formattedvalue="2017/04/11"
+            id="example-datepicker"
+            name={undefined}
+            type="hidden"
+            value="2017-04-11T12:00:00.000Z" />
+          <input
+            autoFocus={false}
+            className="form-control"
+            disabled={false}
+            id={undefined}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            placeholder="YYYY/MM/DD"
+            style={
+              Object {
+                "width": "100%",
+              }
+            }
+            type="text"
+            value="2017/04/11" />
+          <span
+            className="input-group-addon"
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }>
+            <div
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }>
+              ×
+            </div>
+          </span>
+        </span>
+      </div>
+      <a
+        onClick={[Function]}
+        style={Object {}}>
+        <button
+          className="btn btn-primary btn-block"
+          disabled={false}
+          type="button">
+          Przejdź do notyfikacji
+        </button>
+      </a>
+    </div>
+  </div>
+  <div
+    className="col-md-9 col-xs-9">
+    <h3>
+      Kursy walut (
+      2017-04-11
+      )
+    </h3>
+    <hr />
+    <table
+      className="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>
+             
+          </th>
+          <th>
+            Kraj
+          </th>
+          <th>
+            Waluta
+          </th>
+          <th>
+            Symbol
+          </th>
+          <th>
+            Kurs
+          </th>
+          <th>
+             
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <img
+              alt="XYZ"
+              src={undefined} />
+          </td>
+          <td>
+            XXX
+          </td>
+          <td>
+            name
+          </td>
+          <td>
+            XYZ
+          </td>
+          <td>
+            1.23
+          </td>
+          <td>
+            <a
+              onClick={[Function]}
+              style={Object {}}>
+              Zobacz więcej...
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

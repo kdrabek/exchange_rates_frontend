@@ -21,7 +21,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 );
 
 
-class Register extends Component {
+export class Register extends Component {
 
   constructor(props) {
     super(props);

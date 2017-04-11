@@ -10,7 +10,7 @@ import HomeOptions from '../HomeOptions/HomeOptions';
 import * as ratesActions from '../../actions/ratesActions';
 import { currencyCodePictures } from '../../utils/currencyCodes';
 
-class Home extends Component {
+export class Home extends Component {
 
   constructor(props){
     super(props);
