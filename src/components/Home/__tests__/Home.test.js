@@ -3,29 +3,7 @@ import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 
 import { Home } from '../Home';
-
-class LocalStorageMock {
-  constructor() {
-    this.store = {};
-  }
-
-  clear() {
-    this.store = {};
-  }
-
-  getItem(key) {
-    return this.store[key];
-  }
-
-  setItem(key, value) {
-    this.store[key] = value.toString();
-  }
-
-  removeItem(key) {
-    this.store[key] = undefined;
-  }
-};
-
+import LocalStorageMock from '../../../utils/localStorageMock';
 global.localStorage = new LocalStorageMock;
 
 describe('Home component', () => {

@@ -2,29 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Notifications } from '../Notifications';
 import renderer from 'react-test-renderer';
-
-class LocalStorageMock {
-  constructor() {
-    this.store = {};
-  }
-
-  clear() {
-    this.store = {};
-  }
-
-  getItem(key) {
-    return this.store[key];
-  }
-
-  setItem(key, value) {
-    this.store[key] = value.toString();
-  }
-
-  removeItem(key) {
-    this.store[key] = undefined;
-  }
-};
-
+import LocalStorageMock from '../../../utils/localStorageMock';
 global.localStorage = new LocalStorageMock;
 
 describe('Notifications component', () => {
