@@ -4,31 +4,14 @@ import renderer from 'react-test-renderer';
 
 import { Details } from '../Details';
 
-class LocalStorageMock {
-  constructor() {
-    this.store = {};
-  }
-
-  clear() {
-    this.store = {};
-  }
-
-  getItem(key) {
-    return this.store[key];
-  }
-
-  setItem(key, value) {
-    this.store[key] = value.toString();
-  }
-
-  removeItem(key) {
-    this.store[key] = undefined;
-  }
-};
-
+import { LocalStorageMock, removeUserInfo} from '../../../utils/localStorage';
 global.localStorage = new LocalStorageMock;
 
 describe('Details component', () => {
+
+  beforeEach(()=>{
+    removeUserInfo();
+  });
 
   it('matches the snapshot', () => {
     const ratesDetails = [{

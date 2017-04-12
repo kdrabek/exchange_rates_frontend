@@ -66,16 +66,7 @@ exports[`Home component matches the snapshot 1`] = `
           </span>
         </span>
       </div>
-      <a
-        onClick={[Function]}
-        style={Object {}}>
-        <button
-          className="btn btn-primary btn-block"
-          disabled={false}
-          type="button">
-          Przejdź do notyfikacji
-        </button>
-      </a>
+      
     </div>
   </div>
   <div

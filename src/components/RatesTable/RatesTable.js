@@ -16,9 +16,11 @@ class RatesTable extends Component {
   }
 
   prepareBody(data){
-    const tableBody = data.map((rowData, index) => {
-      const row = rowData.map(column => <td>{column}</td>)
-      return <tr key={index}>{row}</tr>;
+    const tableBody = data.map((rowData, rowIndex) => {
+      const row = rowData.map((column, colIndex) => {
+        return <td key={`${rowIndex}_${colIndex}`}>{column}</td>
+      })
+      return <tr key={rowIndex}>{row}</tr>;
     });
 
     return (

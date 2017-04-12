@@ -5,7 +5,7 @@ import { FormControl, Button, FormGroup, ControlLabel, Form } from 'react-bootst
 class NotificationsForm extends Component {
   render() {
     const currencySelect = this.props.currencies.length ? this.props.currencies.map(currency => {
-      return <option value={currency.code}>{currency.code} ({currency.country})</option>
+      return <option key={currency.code} value={currency.code}>{currency.code} ({currency.country})</option>
       }
     ) : <option></option>;
     return (
