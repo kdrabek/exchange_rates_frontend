@@ -14,8 +14,6 @@ npm start
 ```
 
 ### Running tests
-
-The application uses Jest as 
 ```
 cd exchange_rates_frontend
 npm test
