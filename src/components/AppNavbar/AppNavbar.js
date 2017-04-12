@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { Button, Navbar, Nav, NavItem, Row, Col } from 'react-bootstrap';
 
 import * as userActions from '../../actions/userActions';
+import { isAuthenticated } from '../../utils/localStorage';
 
 export class AppNavbar extends React.Component {
 
@@ -48,10 +49,8 @@ export class AppNavbar extends React.Component {
   }
 
   render() {
-    const isAuthenticated = (
-      localStorage.getItem('AuthUserToken') && localStorage.getItem('AuthUserEmail')
-    );
-    const navButtons = isAuthenticated ? this.authenticatedMenu() : this.unauthenticatedMenu();
+    console.log("isAuthenticated: ", isAuthenticated());
+    const navButtons = isAuthenticated() ? this.authenticatedMenu() : this.unauthenticatedMenu();
     return (
       <Navbar inverse collapseOnSelect fluid>
         <Row>

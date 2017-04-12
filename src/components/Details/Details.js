@@ -15,18 +15,18 @@ export class Details extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.authToken = localStorage.getItem('AuthUserToken');
+
   }
   
   componentDidMount(){
     const currencyCode = this.props.routeParams.currencyCode;
-    const authToken = localStorage.getItem('AuthUserToken');
-    this.props.loadRatesForCurrency(authToken, currencyCode, 5);
+    this.props.loadRatesForCurrency(this.authToken, currencyCode, 5);
   }
 
   handleChange(e){
     const currencyCode = this.props.routeParams.currencyCode;
-    const authToken = localStorage.getItem('AuthUserToken');
-    this.props.loadRatesForCurrency(authToken, currencyCode, parseInt(e.target.value, 10));
+    this.props.loadRatesForCurrency(this.authToken, currencyCode, parseInt(e.target.value, 10));
   }
 
   prepareTableData(){

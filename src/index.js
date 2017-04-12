@@ -10,16 +10,12 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Notifications from './components/Notifications/Notifications';
 import Details from './components/Details/Details';
+import { isAuthenticated } from './utils/localStorage';
 
 import './index.css';
 
 function requireAuth(nextState, replace) {
-  const isAuthenticated = (
-      localStorage.getItem('AuthUserToken') !== null &&
-      localStorage.getItem('AuthUserEmail') !== null
-    );
-
-  if (!isAuthenticated) {
+  if (!isAuthenticated()) {
     replace({pathname: '/login'})
   }
 }

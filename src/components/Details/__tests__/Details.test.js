@@ -4,10 +4,14 @@ import renderer from 'react-test-renderer';
 
 import { Details } from '../Details';
 
-import LocalStorageMock from '../../../utils/localStorageMock';
+import { LocalStorageMock, removeUserInfo} from '../../../utils/localStorage';
 global.localStorage = new LocalStorageMock;
 
 describe('Details component', () => {
+
+  beforeEach(()=>{
+    removeUserInfo();
+  });
 
   it('matches the snapshot', () => {
     const ratesDetails = [{

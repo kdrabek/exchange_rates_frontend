@@ -9,6 +9,7 @@ import RatesTable from '../RatesTable/RatesTable';
 import HomeOptions from '../HomeOptions/HomeOptions';
 import * as ratesActions from '../../actions/ratesActions';
 import { currencyCodePictures } from '../../utils/currencyCodes';
+import { isAuthenticated } from '../../utils/localStorage';
 
 export class Home extends Component {
 
@@ -45,15 +46,11 @@ export class Home extends Component {
   }
 
   render() {
-    const isAuthenticated = (
-      localStorage.getItem('AuthUserToken') !== null &&
-      localStorage.getItem('AuthUserEmail') !== null
-    );
     return (
     <Row>
       <Col xs={3} md={3}>
         <HomeOptions 
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={isAuthenticated()}
           tableDate={this.props.rates.tableDate}
           handleChange={this.handleChange}
         />

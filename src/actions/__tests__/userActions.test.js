@@ -5,7 +5,7 @@ import nock from 'nock';
 import * as actions from '../userActions';
 import * as types from '../actionTypes';
 import { BASE_API_URL } from '../../utils/api';
-import LocalStorageMock from '../../utils/localStorageMock';
+import { LocalStorageMock, removeUserInfo } from '../../utils/localStorage';
 global.localStorage = new LocalStorageMock;
 
 const mockStore = configureMockStore([ thunk ]);
@@ -13,6 +13,10 @@ const testUser = {email: 'test@gmail.com', password: 'password'};
 
 
 describe('User Actions', () => {
+
+  beforeEach(()=>{
+    removeUserInfo();
+  });
 
   afterEach(() => {
     nock.cleanAll()

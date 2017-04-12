@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 
 import { Home } from '../Home';
-import LocalStorageMock from '../../../utils/localStorageMock';
+import { LocalStorageMock, removeUserInfo } from '../../../utils/localStorage';
 global.localStorage = new LocalStorageMock;
 
 describe('Home component', () => {
+
+  beforeEach(()=>{
+    removeUserInfo();
+  });
 
   it('matches the snapshot', () => {
     const rates = {

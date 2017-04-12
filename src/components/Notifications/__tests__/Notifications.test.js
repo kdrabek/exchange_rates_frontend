@@ -2,10 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Notifications } from '../Notifications';
 import renderer from 'react-test-renderer';
-import LocalStorageMock from '../../../utils/localStorageMock';
+import { LocalStorageMock, removeUserInfo } from '../../../utils/localStorage';
 global.localStorage = new LocalStorageMock;
 
 describe('Notifications component', () => {
+
+  beforeEach(()=>{
+    removeUserInfo();
+  });
 
   it('matches the snapshot', () => {
     const currencies = [{

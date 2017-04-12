@@ -1,6 +1,7 @@
 import { browserHistory } from 'react-router';
 import * as actionTypes from './actionTypes';
 import Api from '../utils/api';
+import { setUserInfo, removeUserInfo } from '../utils/localStorage';
 
 const ratesApi = new Api();
 
@@ -10,8 +11,7 @@ export function loginUser(user){
       .then(
         response => {
           if (response.token) {
-            localStorage.setItem('AuthUserToken', response.token);
-            localStorage.setItem('AuthUserEmail', user.email);
+            setUserInfo(response.token, user.email);
             dispatch(loginUserComplete(response));
             browserHistory.push('/');
           } else {
@@ -30,8 +30,7 @@ export function registerUser(user){
       .then(
         response => {
           if (response.token) {
-            localStorage.setItem('AuthUserToken', response.token);
-            localStorage.setItem('AuthUserEmail', user.email);
+            setUserInfo(response.token, user.email);
             dispatch(registerUserComplete(response));
             browserHistory.push('/');
           } else {
@@ -46,8 +45,7 @@ export function registerUser(user){
 
 export function logoutUser(){
   return function(dispatch){
-    localStorage.removeItem('AuthUserToken');
-    localStorage.removeItem('AuthUserEmail');
+    removeUserInfo();
     browserHistory.push('/');
     return dispatch(logoutUserComplete());
   }
