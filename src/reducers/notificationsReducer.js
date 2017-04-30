@@ -8,9 +8,9 @@ export const notifications = (state = [], action) => {
     }
 
     case actionTypes.NOTIFICATION_DELETED: {
-      return [
-        ...state.filter(notification => notification.id !== action.notificationId)
-      ];
+      return state.filter(
+        notification => notification.id !== action.notificationId
+      );
     }
 
     case actionTypes.NOTIFICATION_UPDATED: {
